@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/course_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#aec6cf">
+
+    <TextView
+        android:id="@+id/course_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_for_course_id" />
+
+    <LinearLayout
+        android:id="@+id/offered_in_fall"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/course_name"
+        android:orientation="vertical"
+        android:background="#ff853f">
+
+        <TextView
+            android:id="@+id/fall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fall"
+            android:textColor="#000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/offered_in_spring"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/course_name"
+        android:layout_toEndOf="@+id/offered_in_fall"
+        android:orientation="vertical"
+        android:background="#00ff7f">
+
+        <TextView
+            android:id="@+id/spring"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/spring"
+            android:textColor="#000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/offered_in_summer"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/course_name"
+        android:layout_toEndOf="@+id/offered_in_spring"
+        android:orientation="vertical"
+        android:background="#ffeb83">
+
+        <TextView
+            android:id="@+id/summer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/summer"
+            android:textColor="#000"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/prereq_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+string/prereq_1"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:id="@+id/prereq_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+string/prereq_2"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/prereq_1"/>
+    <TextView
+        android:id="@+id/prereq_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+string/prereq_3"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/prereq_2"/>
+
+</RelativeLayout>

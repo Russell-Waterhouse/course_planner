@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Degree Planner</string>
+    <string name="add_another_course">Add another Course</string>
+    <string name="fall">Fall</string>
+    <string name="spring">Spring</string>
+    <string name="summer">Summer</string>
+    <string name="prereq_1">Prereq 1</string>
+    <string name="prereq_2">Prereq 2</string>
+    <string name="prereq_3">Prereq 3</string>
+    <string name="prompt_for_prereqs">Enter all Prereq ID\'s below</string>
+    <string name="check_all_semesters">Check all semesters the course is offered in</string>
+    <string name="prompt_for_course_id">Enter the Course ID here(ie CSC100)</string>
+    <string name="done">done</string>
+    <string name="create_courses">Create Courses</string>
+    <string name="view_progress">Vew my Progress</string>
+</resources>
