@@ -48,15 +48,17 @@ public class CreateNewCourses extends AppCompatActivity {
                 saveCourse();
                 finish();
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
     }
 
     private void saveCourse(){
         //todo: do this through the view model later
-        CourseEntity course = new CourseEntity(courseName.getText().toString(), prereq1.getText().toString(), prereq2.getText().toString(), prereq3.getText().toString(), fall.isChecked(), spring.isChecked(), summer.isChecked(), false, 0.00, null, 0, 'z');
-        viewmodel.insertCourse(course);
+        if(!courseName.getText().toString().equals("")) {
+            CourseEntity course = new CourseEntity(courseName.getText().toString(), prereq1.getText().toString(), prereq2.getText().toString(), prereq3.getText().toString(), fall.isChecked(), spring.isChecked(), summer.isChecked(), false, 0.00, null, 0, 'z');
+            viewmodel.insertCourse(course);
+        }
     }
     private void resetActivity(){
         courseName.setText(null);

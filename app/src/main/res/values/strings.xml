@@ -14,4 +14,7 @@
     <string name="create_courses">Create Courses</string>
     <string name="view_progress">Vew my Progress</string>
     <string name="add_course">Add Course</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="search">Search</string>
 </resources>
