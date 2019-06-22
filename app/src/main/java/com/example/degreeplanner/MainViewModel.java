@@ -24,4 +24,9 @@ public class MainViewModel extends AndroidViewModel {
     public LiveData<List<CourseEntity>> getAllCourses(){
         return allCourses;
     }
+
+    public void insertCourse(CourseEntity course){
+        repository.insertCourse(course);
+    }
+
 }

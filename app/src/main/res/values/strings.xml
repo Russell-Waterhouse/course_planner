@@ -13,4 +13,5 @@
     <string name="done">done</string>
     <string name="create_courses">Create Courses</string>
     <string name="view_progress">Vew my Progress</string>
+    <string name="add_course">Add Course</string>
 </resources>

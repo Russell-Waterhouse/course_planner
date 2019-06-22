@@ -45,6 +45,7 @@ public class CreateNewCourses extends AppCompatActivity {
                 resetActivity();
                 break;
             case R.id.done:
+                saveCourse();
                 finish();
                 break;
                 default:

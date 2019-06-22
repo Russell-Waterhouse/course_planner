@@ -7,17 +7,24 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.degreeplanner.Adapter.CourseArrayAdapter;
+import com.example.degreeplanner.Adapter.ScheduledCourseArrayAdapter;
 import com.example.degreeplanner.Database.CourseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     MainViewModel viewModel;
     List<CourseEntity> courseList;
     ArrayList<CourseEntity> unscheduledCourses;
@@ -35,35 +42,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomListView = findViewById(R.id.bottom_list_view);
-        fall_1_ListView = findViewById(R.id.fall_1);
+//        fall_1_ListView = findViewById(R.id.fall_1);
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         unscheduledCourses = new ArrayList<>();
+        scheduledCourses = new ArrayList<>();
         LiveData<List<CourseEntity>> courseListLive = viewModel.getAllCourses();
         courseListLive.observe(this, new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(List<CourseEntity> courseEntities) {
                 courseList = courseEntities;
+//                scheduledCourses.clear();
+                unscheduledCourses.clear();
+                for(CourseEntity course: courseList){
+                    if(course.getScheduledSemester()=='z' && course.getScheduledYear()==0)
+                        unscheduledCourses.add(course);
+                    else
+                        scheduledCourses.add(course);
+                }
+                Log.d(TAG, "Scheduled courses is: " + scheduledCourses.toString());
+//                Log.d(TAG, "unScheduled courses is: " + unscheduledCourses.toString());
+//                Log.d(TAG, "courses is: " + courseList.toString());
+
+                initSemesters();
                 initListView();
             }
         });
-
-//        bottomListView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                selectedListView = bottomListView;
-//            }
-//        });
-
-//        fall_1_ListView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(!selectedListView.equals(fall_1_ListView)){
-//
-//                }
-//                selectedListView = fall_1_ListView;
-//            }
-//        });
-
+        initSemesters();
         initListView();
     }
 
@@ -73,16 +77,67 @@ public class MainActivity extends AppCompatActivity {
 //        startCreatingCourses
     }
 
-    private void initListView(){
-        if(courseList != null) {
-            for (CourseEntity course : courseList) {
-                if (course.getScheduledYear() == 0) {
-                    unscheduledCourses.add(course);
+
+    private void initSemesters(){
+        LinearLayout parentLayout = findViewById(R.id.viewgroup_parent);
+        parentLayout.removeAllViews();
+
+        for(int i = 1; i<8; i++){
+            //fall layout
+            View fallLayout = View.inflate(this, R.layout.semester_layout, null);
+//            Log.d(TAG, "inflating the fall layout");
+            TextView fallName = fallLayout.findViewById(R.id.semester_name);
+            String semesterName = getString(R.string.fall) + " " +i ;
+            fallName.setText(semesterName);
+            ListView springList = fallLayout.findViewById(R.id.semester_list_view);
+            Log.d(TAG, "CourseList right before fall adapter is : "+ scheduledCourses.toString());
+            ScheduledCourseArrayAdapter fallAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'A');
+            springList.setAdapter(fallAdapter);
+            final int scheduledYear = i;
+            springList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if(selectedListView != null) {
+                        if (selectedListView.equals(bottomListView)) {
+                            CourseEntity movingCourse = unscheduledCourses.get(selectedCoursePosition);
+//                            unscheduledCourses.remove(movingCourse);//todo: see if this is redundant
+//                            scheduledAdapter.notifyDataSetChanged();
+//                            adapter.notifyDataSetChanged();
+                            movingCourse.setScheduledSemester('A');
+                            movingCourse.setScheduledYear(scheduledYear);
+                            viewModel.insertCourse(movingCourse);
+//                    scheduledCourses.add(movingCourse);
+//                    bottomListView.setAdapter(adapter);
+//                    fallListView1.setAdapter(scheduledAdapter);
+                        }
+                    }
                 }
-            }
+            });
+            parentLayout.addView(fallLayout);
+
+            View springLayout = View.inflate(this, R.layout.semester_layout, null);
+//            Log.d(TAG, "inflating the spring layout");
+            TextView springName = springLayout.findViewById(R.id.semester_name);
+            String springSemesterName = getString(R.string.spring) + " " +i ;
+            springName.setText(springSemesterName);
+            springName.setBackgroundColor(getColor(R.color.spring_green));
+            parentLayout.addView(springLayout);
+
+            View summerLayout = View.inflate(this, R.layout.semester_layout, null);
+//            parentLayout.removeView(summerLayout);
+//            Log.d(TAG, "inflating the summer layout");
+            TextView summerName = summerLayout.findViewById(R.id.semester_name);
+            String summerSemesterName = getString(R.string.summer) + " " +i ;
+            summerName.setText(summerSemesterName);
+            summerName.setBackgroundColor(getColor(R.color.summer_yellow));
+            parentLayout.addView(summerLayout);
         }
+    }
+    private void initListView(){
+
+
         final ListView bottomListView = findViewById(R.id.bottom_list_view);
-        CourseArrayAdapter adapter = new CourseArrayAdapter(getApplicationContext(), R.layout.course_layout, unscheduledCourses);
+        final CourseArrayAdapter adapter = new CourseArrayAdapter(getApplicationContext(), R.layout.course_layout, unscheduledCourses);
         bottomListView.setAdapter(adapter);
         bottomListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,9 +147,36 @@ public class MainActivity extends AppCompatActivity {
                 selectedCourse = view;
                 selectedCourse.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
                 selectedCoursePosition = position;
-
+                selectedListView = bottomListView;
             }
         });
+
+//        final ListView fallListView1 = findViewById(R.id.fall_1);
+
+        //creates the scheduled semester views
+
+
+//        final ScheduledCourseArrayAdapter scheduledAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, 1, 'A');
+//        fallListView1.setAdapter(scheduledAdapter);
+//        fallListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if(selectedListView != null) {
+//                    if (selectedListView.equals(bottomListView)) {
+//                        CourseEntity movingCourse = unscheduledCourses.get(selectedCoursePosition);
+//                        unscheduledCourses.remove(movingCourse);//todo: see if this is redundant
+//                        scheduledAdapter.notifyDataSetChanged();
+//                        adapter.notifyDataSetChanged();
+//                        movingCourse.setScheduledSemester('A');
+//                        movingCourse.setScheduledYear(1);
+//                        viewModel.insertCourse(movingCourse);
+////                    scheduledCourses.add(movingCourse);
+////                    bottomListView.setAdapter(adapter);
+////                    fallListView1.setAdapter(scheduledAdapter);
+//                    }
+//                }
+//            }
+//        });
     }
 
 
