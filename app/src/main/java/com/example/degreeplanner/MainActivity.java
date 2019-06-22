@@ -25,16 +25,17 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+
     MainViewModel viewModel;
-    List<CourseEntity> courseList;
+    List<CourseEntity> mCourseList;
     ArrayList<CourseEntity> unscheduledCourses;
     ArrayList<CourseEntity> scheduledCourses;
+    ArrayList<ScheduledCourseArrayAdapter> mAdapterList;
     View selectedCourse;
 
     private int selectedCoursePosition;
     private ListView selectedListView;
     ListView bottomListView ;
-    ListView fall_1_ListView ;
 
 
     @Override
@@ -42,45 +43,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomListView = findViewById(R.id.bottom_list_view);
-//        fall_1_ListView = findViewById(R.id.fall_1);
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         unscheduledCourses = new ArrayList<>();
         scheduledCourses = new ArrayList<>();
-        LiveData<List<CourseEntity>> courseListLive = viewModel.getAllCourses();
-        courseListLive.observe(this, new Observer<List<CourseEntity>>() {
+        mAdapterList = new ArrayList<>();
+
+        viewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(List<CourseEntity> courseEntities) {
-                courseList = courseEntities;
-//                scheduledCourses.clear();
-                unscheduledCourses.clear();
-                for(CourseEntity course: courseList){
-                    if(course.getScheduledSemester()=='z' && course.getScheduledYear()==0)
-                        unscheduledCourses.add(course);
-                    else
-                        scheduledCourses.add(course);
-                }
-                Log.d(TAG, "Scheduled courses is: " + scheduledCourses.toString());
-//                Log.d(TAG, "unScheduled courses is: " + unscheduledCourses.toString());
-//                Log.d(TAG, "courses is: " + courseList.toString());
-
-                initSemesters();
-                initListView();
+                mCourseList = courseEntities;
+                initLists();
+                updateViews();
+//                initSemesters();
             }
         });
+
         initSemesters();
         initListView();
     }
 
+
+    private void updateViews(){
+        initLists();
+        for(ScheduledCourseArrayAdapter adapter: mAdapterList){
+            adapter.updateDataSet(scheduledCourses);
+        }
+    }
+
+    private void initLists(){
+        if(mCourseList!= null) {
+            Log.d(TAG, "initLists called and the value of mCourseList is: " + mCourseList.toString());
+            scheduledCourses.clear();
+            unscheduledCourses.clear();
+            for (CourseEntity course : mCourseList) {
+                if (course.getScheduledSemester() == 'z' && course.getScheduledYear() == 0)
+                    unscheduledCourses.add(course);
+                else
+                    scheduledCourses.add(course);
+            }
+            Log.d(TAG, "initLists called and the value of scheduledCourses is: " + scheduledCourses.toString());
+
+        }
+    }
     public void createCourses(View v){
         Intent startCreatingCourses = new Intent(this, CreateNewCourses.class);
         startActivity(startCreatingCourses);
-//        startCreatingCourses
     }
 
 
     private void initSemesters(){
         LinearLayout parentLayout = findViewById(R.id.viewgroup_parent);
         parentLayout.removeAllViews();
+
 
         for(int i = 1; i<8; i++){
             //fall layout
@@ -90,8 +104,10 @@ public class MainActivity extends AppCompatActivity {
             String semesterName = getString(R.string.fall) + " " +i ;
             fallName.setText(semesterName);
             ListView springList = fallLayout.findViewById(R.id.semester_list_view);
+            initLists();
             Log.d(TAG, "CourseList right before fall adapter is : "+ scheduledCourses.toString());
             ScheduledCourseArrayAdapter fallAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'A');
+            mAdapterList.add(fallAdapter);
             springList.setAdapter(fallAdapter);
             final int scheduledYear = i;
             springList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -193,3 +209,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
+
+
+
+

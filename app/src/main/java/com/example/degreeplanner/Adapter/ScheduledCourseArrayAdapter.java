@@ -33,13 +33,20 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
         mContext = context;
         thisSemesterCourses = new ArrayList<>();
         Log.d(TAG, "The courseList is: " + courses.toString());
+        initThisSemesterCourses(courses, year, semester);
+    }
+
+    private void initThisSemesterCourses(List<CourseEntity> courses, int year, char semester){
+        thisSemesterCourses.clear();
         for(CourseEntity course: courses){
             Log.d(TAG, "The course is: "+ course.toString());
             if(course.getScheduledYear()==year && course.getScheduledSemester()==semester)
                 thisSemesterCourses.add(course);
         }
+        CourseEntity nullCourse = new CourseEntity(mContext.getString(R.string.add_course), null, null, null, true, true, true, false, 0.00, "z", 0, 'z');
         if(thisSemesterCourses.isEmpty())
-            thisSemesterCourses.add(new CourseEntity(mContext.getString(R.string.add_course), null, null, null, true, true, true, false, 0.00, "z", 0, 'z'));
+            thisSemesterCourses.add(nullCourse);
+
     }
 
     @NonNull
@@ -83,5 +90,10 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
     @Override
     public CourseEntity getItem(int position) {
         return thisSemesterCourses.get(position);
+    }
+
+    public void updateDataSet(@NonNull List<CourseEntity> courses){
+        initThisSemesterCourses(courses, mYear, mSemester);
+        notifyDataSetChanged();
     }
 }
