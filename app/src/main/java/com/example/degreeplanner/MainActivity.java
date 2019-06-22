@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView selectedListView;
     ListView bottomListView ;
     Button deleteButton;
+    Button editButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         scheduledCourses = new ArrayList<>();
         mAdapterList = new ArrayList<>();
         deleteButton = findViewById(R.id.delete_button);
+        editButton = findViewById(R.id.edit_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 selectedListView = null;
                 selectedCoursePosition = 0;
                 deleteButton.setVisibility(View.INVISIBLE);
+            }
+        });
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CreateNewCourses.class));
+                editButton.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -174,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
                         selectedCourse = null;
                         selectedListView = null;
                         deleteButton.setVisibility(View.INVISIBLE);
+                        editButton.setVisibility(View.INVISIBLE);
+
                     }
                     //a scheduled course somewhere else is selected, move it here
                     else if (!selectedListView.equals(currentList) && selectedCourse != null) {
@@ -187,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                         selectedCourse = null;
                         selectedListView = null;
                         deleteButton.setVisibility(View.INVISIBLE);
+                        editButton.setVisibility(View.INVISIBLE);
                     }
                     //nothing else is selected, select this course
                 } else {
@@ -196,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedCoursePosition = scheduledCourses.indexOf(currentAdapter.getItem(position));
                     selectedListView = currentList;
                     deleteButton.setVisibility(View.VISIBLE);
+                    editButton.setVisibility(View.VISIBLE);
 
                 }
 
@@ -218,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
                 selectedCoursePosition = position;
                 selectedListView = bottomListView;
                 deleteButton.setVisibility(View.VISIBLE);
+                editButton.setVisibility(View.VISIBLE);
             }
         });
 
