@@ -18,11 +18,10 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class CourseArrayAdapter extends ArrayAdapter<CourseEntity> {
+public class UnscheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity> {
 
-    private Context mContext;
 
-    public CourseArrayAdapter(Context context, int resource, List<CourseEntity> courses){
+    public UnscheduledCourseArrayAdapter(Context context, int resource, @NonNull List<CourseEntity> courses){
         super(context, resource, courses);
     }
 
@@ -45,14 +44,26 @@ public class CourseArrayAdapter extends ArrayAdapter<CourseEntity> {
             prereq1.setText(course.getPrereq1Str());
             prereq2.setText(course.getPrereq2Str());
             prereq3.setText(course.getPrereq3Str());
-            if(!course.isOfferedInFall())
+            if (course.isOfferedInFall()) {
                 fall.setVisibility(View.INVISIBLE);
-            if(!course.isOfferedInSpring())
+            } else {
+                fall.setVisibility(View.VISIBLE);
+            }
+            if (!course.isOfferedInSpring()) {
                 spring.setVisibility(View.INVISIBLE);
-            if(!course.isOfferedInSummer())
+            } else {
+                spring.setVisibility(View.VISIBLE);
+            }
+            if (!course.isOfferedInSummer()){
                 summer.setVisibility(View.INVISIBLE);
+            }
+            else{
+                summer.setVisibility(View.VISIBLE);
+            }
         }
-
         return convertView;
     }
+
+
 }
+

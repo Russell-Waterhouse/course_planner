@@ -43,9 +43,8 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
             if(course.getScheduledYear()==year && course.getScheduledSemester()==semester)
                 thisSemesterCourses.add(course);
         }
-        CourseEntity nullCourse = new CourseEntity(mContext.getString(R.string.add_course), null, null, null, true, true, true, false, 0.00, "z", 0, 'z');
         if(thisSemesterCourses.isEmpty())
-            thisSemesterCourses.add(nullCourse);
+            thisSemesterCourses.add(new CourseEntity(mContext.getString(R.string.add_course), null, null, null, true, true, true, false, 0.00, "z", 0, 'z'));
 
     }
 
@@ -70,12 +69,22 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
             prereq1.setText(course.getPrereq1Str());
             prereq2.setText(course.getPrereq2Str());
             prereq3.setText(course.getPrereq3Str());
-            if(!course.isOfferedInFall())
+            if (!course.isOfferedInFall()) {
                 fall.setVisibility(View.INVISIBLE);
-            if(!course.isOfferedInSpring())
+            } else {
+                fall.setVisibility(View.VISIBLE);
+            }
+            if (!course.isOfferedInSpring()) {
                 spring.setVisibility(View.INVISIBLE);
-            if(!course.isOfferedInSummer())
+            } else {
+                spring.setVisibility(View.VISIBLE);
+            }
+            if (!course.isOfferedInSummer()){
                 summer.setVisibility(View.INVISIBLE);
+            }
+            else{
+                summer.setVisibility(View.VISIBLE);
+            }
         }
 
         return convertView;
