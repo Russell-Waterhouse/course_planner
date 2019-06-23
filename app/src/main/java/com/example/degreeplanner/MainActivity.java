@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<CourseEntity> unscheduledCourses;
     ArrayList<CourseEntity> scheduledCourses;
     ArrayList<ScheduledCourseArrayAdapter> mAdapterList;
+    Boolean courseIsSelected = false;
     View selectedCourse;
 
     private int selectedCoursePosition;
@@ -46,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
         unscheduledCourses = new ArrayList<>();
         scheduledCourses = new ArrayList<>();
         mAdapterList = new ArrayList<>();
+        initButtons();
+        viewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
+            @Override
+            public void onChanged(List<CourseEntity> courseEntities) {
+                mCourseList = courseEntities;
+                initLists();
+                updateViews();
+            }
+        });
+
+        initSemesters();
+        initBottomListView();
+    }
+
+    private void initButtons(){
         deleteButton = findViewById(R.id.delete_button);
         editButton = findViewById(R.id.edit_button);
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -70,17 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
-            @Override
-            public void onChanged(List<CourseEntity> courseEntities) {
-                mCourseList = courseEntities;
-                initLists();
-                updateViews();
-            }
-        });
-
-        initSemesters();
-        initListView();
     }
 
 
@@ -184,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                         selectedListView = null;
                         deleteButton.setVisibility(View.INVISIBLE);
                         editButton.setVisibility(View.INVISIBLE);
-
+                        courseIsSelected = false;
                     }
                     //a scheduled course somewhere else is selected, move it here
                     else if (!selectedListView.equals(currentList) && selectedCourse != null) {
@@ -199,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                         selectedListView = null;
                         deleteButton.setVisibility(View.INVISIBLE);
                         editButton.setVisibility(View.INVISIBLE);
+                        courseIsSelected = false;
                     }
                     //nothing else is selected, select this course
                 } else {
@@ -215,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
-    private void initListView(){
+    private void initBottomListView(){
 
 
         final ListView bottomListView = findViewById(R.id.bottom_list_view);
@@ -226,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(selectedCourse != null)
                     selectedCourse.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+                courseIsSelected = true;
                 selectedCourse = view;
                 selectedCourse.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
                 selectedCoursePosition = position;
