@@ -32,14 +32,14 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
         mSemester = semester;
         mContext = context;
         thisSemesterCourses = new ArrayList<>();
-        Log.d(TAG, "The courseList is: " + courses.toString());
+//        Log.d(TAG, "The courseList is: " + courses.toString());
         initThisSemesterCourses(courses, year, semester);
     }
 
     private void initThisSemesterCourses(List<CourseEntity> courses, int year, char semester){
         thisSemesterCourses.clear();
         for(CourseEntity course: courses){
-            Log.d(TAG, "The course is: "+ course.toString());
+//            Log.d(TAG, "The course is: "+ course.toString());
             if(course.getScheduledYear()==year && course.getScheduledSemester()==semester)
                 thisSemesterCourses.add(course);
         }
@@ -51,10 +51,10 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Log.d(TAG, "getView called; thisSemesterCourses: "+ thisSemesterCourses.toString());
+//        Log.d(TAG, "getView called; thisSemesterCourses: "+ thisSemesterCourses.toString());
         if(convertView==null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.course_layout, parent, false);
-            Log.d(TAG, "getView called");
+//            Log.d(TAG, "getView called");
         }
         CourseEntity course = this.getItem(position);
         TextView courseName = convertView.findViewById(R.id.course_name);

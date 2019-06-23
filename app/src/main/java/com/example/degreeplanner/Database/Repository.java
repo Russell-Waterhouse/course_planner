@@ -64,6 +64,21 @@ private static class deleteCourseAsyncTask extends AsyncTask<CourseEntity, Void,
         }
     }
 
+    public void updateCourse(CourseEntity courseEntity){
+        new UpdateCourseAsyncTask(dao).execute(courseEntity);
+    }
+private static class UpdateCourseAsyncTask extends AsyncTask<CourseEntity, Void, Void>{
+        CourseDAO dao;
+        UpdateCourseAsyncTask(CourseDAO DAO){
+            this.dao = DAO;
+        }
+        protected Void doInBackground(CourseEntity... courseEntities){
+            dao.updateCourse(courseEntities[0]);
+            return null;
+        }
+    }
+
+
 private static class deleteAllDataAsyncTask extends AsyncTask<Void, Void, Void> {
         CourseDAO dao;
         deleteAllDataAsyncTask(CourseDAO dao){

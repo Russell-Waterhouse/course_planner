@@ -44,7 +44,7 @@ public class UnscheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity> {
             prereq1.setText(course.getPrereq1Str());
             prereq2.setText(course.getPrereq2Str());
             prereq3.setText(course.getPrereq3Str());
-            if (course.isOfferedInFall()) {
+            if (!course.isOfferedInFall()) {
                 fall.setVisibility(View.INVISIBLE);
             } else {
                 fall.setVisibility(View.VISIBLE);

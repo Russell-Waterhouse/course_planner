@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.degreeplanner.Adapter.ScheduledCourseArrayAdapter;
 import com.example.degreeplanner.Adapter.UnscheduledCourseArrayAdapter;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     boolean courseIsSelected = false;
     boolean isScheduledCourseSelected = false;
     private int selectedCoursePosition;
-    View selectedCourse;
+    View selectedCourseView;
     Button editButton;
     Button deleteButton;
 
@@ -79,13 +81,11 @@ public class MainActivity extends AppCompatActivity {
     private void updateViews() {
         for (ScheduledCourseArrayAdapter adapter : mAdapterList) {
             adapter.updateDataSet(scheduledCourses);
+//            adapter.notifyDataSetChanged();
         }
         bottomAdapter.notifyDataSetChanged();
     }
 
-    private void initSemesters() {
-
-    }
 
     private void initBottomListView() {
         bottomListView = findViewById(R.id.bottom_list_view);
@@ -96,15 +96,15 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (courseIsSelected) {
                     //if there is a course selected somewhere else, deselect it
-                    selectedCourse.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+                    selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
                 }
                 //select the tapped on course
                 courseIsSelected = true;
                 isScheduledCourseSelected = false;
-                selectedCourse = view;
-                selectedCourse.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
+                selectedCourseView = view;
+                selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
                 selectedCoursePosition = position;
-                Log.d(TAG, "The selected course is: " + unscheduledCourses.get(position).toString());
+//                Log.d(TAG, "The selected course is: " + unscheduledCourses.get(position).toString());
             }//tested
         });
     }
@@ -128,13 +128,120 @@ public class MainActivity extends AppCompatActivity {
         Intent startCreatingCourses = new Intent(this, CreateNewCourses.class);
         startActivity(startCreatingCourses);
     }
+
+
+    private void initSemesters() {
+        LinearLayout parentLayout = findViewById(R.id.viewgroup_parent);
+
+        for (int i = 1; i < 8; i++) {
+            //init fall layout
+            View fallLayout = View.inflate(this, R.layout.semester_layout, null);
+            TextView fallName = fallLayout.findViewById(R.id.semester_name);
+            String semesterName = getString(R.string.fall) + " " + i;
+            fallName.setText(semesterName);
+            ListView fallList = fallLayout.findViewById(R.id.semester_list_view);
+            ScheduledCourseArrayAdapter fallAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'A');
+            mAdapterList.add(fallAdapter);
+            fallList.setAdapter(fallAdapter);
+            fallList.setOnItemClickListener(getOnItemClickListener(i, 'A', fallList, fallAdapter));
+            parentLayout.addView(fallLayout);
+            //init spring layout
+
+            //init summer layout
+        }
+    }
+
+
+    private AdapterView.OnItemClickListener getOnItemClickListener(final int scheduledYear, final char scheduledSemester, final ListView currentList, final ScheduledCourseArrayAdapter currentAdapter) {
+        return new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //there is a course somewhere selected
+                if (courseIsSelected) {
+                    //an unscheduled course is selected, move it here
+                    if (!isScheduledCourseSelected) {
+                        if (selectedCourseView != null) {
+                            courseIsSelected = false;
+                            selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+                            CourseEntity movingCourse = unscheduledCourses.get(selectedCoursePosition);
+                            movingCourse.setScheduledSemester(scheduledSemester);
+                            movingCourse.setScheduledYear(scheduledYear);
+                            viewModel.updateCourse(movingCourse);
+                        }
+                    }
+                    //a scheduled course is selected, move it here
+                    else{
+                        if(selectedCourseView != null){
+                            courseIsSelected = false;
+                            isScheduledCourseSelected = false;
+                            selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+                            CourseEntity movingCourse = scheduledCourses.get(selectedCoursePosition);
+                            movingCourse.setScheduledSemester(scheduledSemester);
+                            movingCourse.setScheduledYear(scheduledYear);
+                            viewModel.updateCourse(movingCourse);
+                        }
+                    }
+                }
+                //there is no course selected, select this one
+                else {
+                    courseIsSelected = true;
+                    selectedCourseView = view;
+                    selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
+                    isScheduledCourseSelected = true;
+                    selectedCoursePosition = scheduledCourses.indexOf(currentAdapter.getItem(position));
+//                    Log.d(TAG, "The selected course is: " + scheduledCourses.get(position).toString());
+                }
+            }
+        };
+    }
 }
+
+////                        Log.d(TAG, "tap case 1");
+//                        CourseEntity movingCourse = unscheduledCourses.get(selectedCoursePosition);
+//                        movingCourse.setScheduledSemester(scheduledSemester);
+//                        movingCourse.setScheduledYear(scheduledYear);
+//                        viewModel.insertCourse(movingCourse);
+//                        selectedCourseView = null;
+//                        selectedListView = null;
+//                        deleteButton.setVisibility(View.INVISIBLE);
+//                        editButton.setVisibility(View.INVISIBLE);
+//                        courseIsSelected = false;
+//                    }
+//                    //a scheduled course somewhere else is selected, move it here
+//                    else if (!selectedListView.equals(currentList) && selectedCourseView != null) {
+////                        Log.d(TAG, "tap case 2");
+//                        CourseEntity movingCourse = scheduledCourses.get(selectedCoursePosition);
+//                        movingCourse.setScheduledYear(scheduledYear);
+//                        movingCourse.setScheduledSemester(scheduledSemester);
+////                        Log.d(TAG, "tap case 2: the moving course is : " + movingCourse.toString());
+//                        viewModel.insertCourse(movingCourse);
+//                        selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+//                        selectedCourseView = null;
+//                        selectedListView = null;
+//                        deleteButton.setVisibility(View.INVISIBLE);
+//                        editButton.setVisibility(View.INVISIBLE);
+//                        courseIsSelected = false;
+//                    }
+//                    //nothing else is selected, select this course
+//                } else {
+//                    selectedCourseView = view;
+////                    Log.d(TAG, "tap case 3");
+//                    selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
+//                    selectedCoursePosition = scheduledCourses.indexOf(currentAdapter.getItem(position));
+//                    selectedListView = currentList;
+//                    deleteButton.setVisibility(View.VISIBLE);
+//                    editButton.setVisibility(View.VISIBLE);
+//
+//                }
+//
+//            }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // above this line is good new code, below is bad code
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    ArrayList<ScheduledCourseArrayAdapter> mAdapterList;
 //    Boolean courseIsSelected = false;
-//    View selectedCourse;
+//    View selectedCourseView;
 //
 //    private int selectedCoursePosition;
 //    private ListView selectedListView;
@@ -154,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //                else
 //                    viewModel.remove(scheduledCourses.get(selectedCoursePosition));
-//                selectedCourse = null;
+//                selectedCourseView = null;
 //                selectedListView = null;
 //                selectedCoursePosition = 0;
 //                deleteButton.setVisibility(View.INVISIBLE);
@@ -256,28 +363,28 @@ public class MainActivity extends AppCompatActivity {
 //
 //                if (selectedListView != null) {
 //                    //an unscheduled course is selected, move it here
-//                    if (bottomListView.equals(selectedListView) && selectedCourse != null) {
+//                    if (bottomListView.equals(selectedListView) && selectedCourseView != null) {
 ////                        Log.d(TAG, "tap case 1");
 //                        CourseEntity movingCourse = unscheduledCourses.get(selectedCoursePosition);
 //                        movingCourse.setScheduledSemester(scheduledSemester);
 //                        movingCourse.setScheduledYear(scheduledYear);
 //                        viewModel.insertCourse(movingCourse);
-//                        selectedCourse = null;
+//                        selectedCourseView = null;
 //                        selectedListView = null;
 //                        deleteButton.setVisibility(View.INVISIBLE);
 //                        editButton.setVisibility(View.INVISIBLE);
 //                        courseIsSelected = false;
 //                    }
 //                    //a scheduled course somewhere else is selected, move it here
-//                    else if (!selectedListView.equals(currentList) && selectedCourse != null) {
+//                    else if (!selectedListView.equals(currentList) && selectedCourseView != null) {
 ////                        Log.d(TAG, "tap case 2");
 //                        CourseEntity movingCourse = scheduledCourses.get(selectedCoursePosition);
 //                        movingCourse.setScheduledYear(scheduledYear);
 //                        movingCourse.setScheduledSemester(scheduledSemester);
 ////                        Log.d(TAG, "tap case 2: the moving course is : " + movingCourse.toString());
 //                        viewModel.insertCourse(movingCourse);
-//                        selectedCourse.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
-//                        selectedCourse = null;
+//                        selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+//                        selectedCourseView = null;
 //                        selectedListView = null;
 //                        deleteButton.setVisibility(View.INVISIBLE);
 //                        editButton.setVisibility(View.INVISIBLE);
@@ -285,9 +392,9 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                    //nothing else is selected, select this course
 //                } else {
-//                    selectedCourse = view;
+//                    selectedCourseView = view;
 ////                    Log.d(TAG, "tap case 3");
-//                    selectedCourse.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
+//                    selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
 //                    selectedCoursePosition = scheduledCourses.indexOf(currentAdapter.getItem(position));
 //                    selectedListView = currentList;
 //                    deleteButton.setVisibility(View.VISIBLE);
@@ -307,11 +414,11 @@ public class MainActivity extends AppCompatActivity {
 //        bottomListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if(selectedCourse != null)
-//                    selectedCourse.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+//                if(selectedCourseView != null)
+//                    selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
 //                courseIsSelected = true;
-//                selectedCourse = view;
-//                selectedCourse.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
+//                selectedCourseView = view;
+//                selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
 //                selectedCoursePosition = position;
 //                selectedListView = bottomListView;
 //                deleteButton.setVisibility(View.VISIBLE);

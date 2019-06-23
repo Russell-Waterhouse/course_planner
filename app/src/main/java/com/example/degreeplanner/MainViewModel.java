@@ -33,4 +33,7 @@ public class MainViewModel extends AndroidViewModel {
         repository.deleteCourse(course);
     }
 
+    public void updateCourse(CourseEntity courseEntity){
+        repository.updateCourse(courseEntity);
+    }
 }
