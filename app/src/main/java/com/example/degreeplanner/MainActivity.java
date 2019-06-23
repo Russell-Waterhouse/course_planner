@@ -137,17 +137,40 @@ public class MainActivity extends AppCompatActivity {
             //init fall layout
             View fallLayout = View.inflate(this, R.layout.semester_layout, null);
             TextView fallName = fallLayout.findViewById(R.id.semester_name);
-            String semesterName = getString(R.string.fall) + " " + i;
-            fallName.setText(semesterName);
+            String fallsemesterName = getString(R.string.fall) + " " + i;
+            fallName.setText(fallsemesterName);
             ListView fallList = fallLayout.findViewById(R.id.semester_list_view);
             ScheduledCourseArrayAdapter fallAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'A');
             mAdapterList.add(fallAdapter);
             fallList.setAdapter(fallAdapter);
             fallList.setOnItemClickListener(getOnItemClickListener(i, 'A', fallList, fallAdapter));
             parentLayout.addView(fallLayout);
+
             //init spring layout
+            View springLayout = View.inflate(this, R.layout.semester_layout, null);
+            TextView springName = springLayout.findViewById(R.id.semester_name);
+            String springSemesterName = getString(R.string.spring) + " " + i;
+            springName.setText(springSemesterName);
+            springName.setBackgroundColor(getColor(R.color.spring_green));
+            ListView springList = springLayout.findViewById(R.id.semester_list_view);
+            ScheduledCourseArrayAdapter springAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'B');
+            mAdapterList.add(springAdapter);
+            springList.setAdapter(springAdapter);
+            springList.setOnItemClickListener(getOnItemClickListener(i, 'B', springList, springAdapter));
+            parentLayout.addView(springLayout);
 
             //init summer layout
+            View summerLayout = View.inflate(this, R.layout.semester_layout, null);
+            TextView summerName = summerLayout.findViewById(R.id.semester_name);
+            String summerSemesterName = getString(R.string.summer) + " " + i;
+            summerName.setText(summerSemesterName);
+            summerName.setBackgroundColor(getColor(R.color.summer_yellow));
+            ListView summerList = summerLayout.findViewById(R.id.semester_list_view);
+            ScheduledCourseArrayAdapter summerAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'B');
+            mAdapterList.add(summerAdapter);
+            summerList.setAdapter(summerAdapter);
+            summerList.setOnItemClickListener(getOnItemClickListener(i, 'B', summerList, summerAdapter));
+            parentLayout.addView(summerLayout);
         }
     }
 
@@ -321,9 +344,9 @@ public class MainActivity extends AppCompatActivity {
 //            fallList.setOnItemClickListener(getOnItemClickListener(i, 'A', fallList, fallAdapter));
 //            parentLayout.addView(fallLayout);
 //
-//            //init spring layouts
+            //init spring layouts
 //            View springLayout = View.inflate(this, R.layout.semester_layout, null);
-////            Log.d(TAG, "inflating the spring layout");
+//            Log.d(TAG, "inflating the spring layout");
 //            TextView springName = springLayout.findViewById(R.id.semester_name);
 //            String springSemesterName = getString(R.string.spring) + " " +i ;
 //            springName.setText(springSemesterName);
