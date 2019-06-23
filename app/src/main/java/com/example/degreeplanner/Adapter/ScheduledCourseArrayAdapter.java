@@ -25,6 +25,7 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
     private ArrayList<CourseEntity> thisSemesterCourses;
     private int mYear;
     private char mSemester;
+    boolean mIsEmpty = false;
 
     public ScheduledCourseArrayAdapter(@NonNull Context context, int resource, @NonNull List<CourseEntity> courses, int year, char semester){
         super(context, resource);
@@ -43,8 +44,13 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
             if(course.getScheduledYear()==year && course.getScheduledSemester()==semester)
                 thisSemesterCourses.add(course);
         }
-        if(thisSemesterCourses.isEmpty())
+        if(thisSemesterCourses.isEmpty()) {
             thisSemesterCourses.add(new CourseEntity(mContext.getString(R.string.add_course), null, null, null, true, true, true, false, 0.00, "z", 0, 'z'));
+            mIsEmpty = true;
+        }
+        else{
+            mIsEmpty = false;
+        }
 
     }
 
@@ -104,5 +110,10 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
     public void updateDataSet(@NonNull List<CourseEntity> courses){
         initThisSemesterCourses(courses, mYear, mSemester);
         notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return mIsEmpty;
     }
 }

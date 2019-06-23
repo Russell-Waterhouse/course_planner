@@ -16,7 +16,6 @@
         android:padding="8dp"
         android:background="@color/colorPrimaryDark">
 
-        <!--todo: implement-->
         <Button
             android:id="@+id/edit_button"
             android:layout_width="wrap_content"
@@ -33,9 +32,7 @@
             android:layout_gravity="center_horizontal"
             android:background="#FFFFFF"
             android:drawableStart="@drawable/ic_search_black_24dp"
-            android:hint="@string/search"
-            tools:layout_editor_absoluteX="131dp"
-            tools:layout_editor_absoluteY="20dp" />
+            android:hint="@string/search" />
         <Button
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
@@ -97,10 +94,10 @@
         app:layout_constraintBottom_toTopOf="@+id/view_progress_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/divider_guideline" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/divider_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

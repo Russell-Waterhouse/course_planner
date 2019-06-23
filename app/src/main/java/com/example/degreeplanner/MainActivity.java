@@ -1,6 +1,7 @@
 package com.example.degreeplanner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -104,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 selectedCourseView = view;
                 selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
                 selectedCoursePosition = position;
+                deleteButton.setVisibility(View.VISIBLE);
+                editButton.setVisibility(View.VISIBLE);
 //                Log.d(TAG, "The selected course is: " + unscheduledCourses.get(position).toString());
             }//tested
         });
@@ -115,10 +118,43 @@ public class MainActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //go  to the editing activity
-                //todo: figure out how to send information from the currently selected course to the activity
-                startActivity(new Intent(MainActivity.this, CreateNewCourses.class));
-                finish();
+                if(courseIsSelected) {
+                    //go  to the editing activity
+                    //todo: figure out how to send information from the currently selected course to the activity
+                    startActivity(new Intent(MainActivity.this, CreateNewCourses.class));
+                    editButton.setVisibility(View.INVISIBLE);
+                    finish();
+                }
+                else{
+                    deleteButton.setVisibility(View.INVISIBLE);
+                    editButton.setVisibility(View.INVISIBLE);
+                }
+
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!courseIsSelected){
+                    deleteButton.setVisibility(View.INVISIBLE);
+                    editButton.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    if(!isScheduledCourseSelected){
+                        viewModel.remove(unscheduledCourses.get(selectedCoursePosition));
+                    }
+                    else{
+                        viewModel.remove((scheduledCourses.get(selectedCoursePosition)));
+                    }
+                    deleteButton.setVisibility(View.INVISIBLE);
+                    editButton.setVisibility(View.INVISIBLE);
+                    selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+                    isScheduledCourseSelected = false;
+                    courseIsSelected = false;
+                    selectedCoursePosition = 0;
+                    selectedCourseView = null;
+                }
             }
         });
     }
@@ -166,10 +202,10 @@ public class MainActivity extends AppCompatActivity {
             summerName.setText(summerSemesterName);
             summerName.setBackgroundColor(getColor(R.color.summer_yellow));
             ListView summerList = summerLayout.findViewById(R.id.semester_list_view);
-            ScheduledCourseArrayAdapter summerAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'B');
+            ScheduledCourseArrayAdapter summerAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'C');
             mAdapterList.add(summerAdapter);
             summerList.setAdapter(summerAdapter);
-            summerList.setOnItemClickListener(getOnItemClickListener(i, 'B', summerList, summerAdapter));
+            summerList.setOnItemClickListener(getOnItemClickListener(i, 'C', summerList, summerAdapter));
             parentLayout.addView(summerLayout);
         }
     }
@@ -190,6 +226,8 @@ public class MainActivity extends AppCompatActivity {
                             movingCourse.setScheduledSemester(scheduledSemester);
                             movingCourse.setScheduledYear(scheduledYear);
                             viewModel.updateCourse(movingCourse);
+                            deleteButton.setVisibility(View.INVISIBLE);
+                            editButton.setVisibility(View.INVISIBLE);
                         }
                     }
                     //a scheduled course is selected, move it here
@@ -202,22 +240,31 @@ public class MainActivity extends AppCompatActivity {
                             movingCourse.setScheduledSemester(scheduledSemester);
                             movingCourse.setScheduledYear(scheduledYear);
                             viewModel.updateCourse(movingCourse);
+                            deleteButton.setVisibility(View.INVISIBLE);
+                            editButton.setVisibility(View.INVISIBLE);
                         }
                     }
                 }
                 //there is no course selected, select this one
                 else {
-                    courseIsSelected = true;
-                    selectedCourseView = view;
-                    selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
-                    isScheduledCourseSelected = true;
-                    selectedCoursePosition = scheduledCourses.indexOf(currentAdapter.getItem(position));
+                    Log.d(TAG, "isEmpty returns : " + parent.getAdapter().isEmpty());
+                    if(!parent.getAdapter().isEmpty()) {
+                        courseIsSelected = true;
+                        selectedCourseView = view;
+                        selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
+                        isScheduledCourseSelected = true;
+                        selectedCoursePosition = scheduledCourses.indexOf(currentAdapter.getItem(position));
+                        deleteButton.setVisibility(View.VISIBLE);
+                        editButton.setVisibility(View.VISIBLE);
 //                    Log.d(TAG, "The selected course is: " + scheduledCourses.get(position).toString());
+                    }
                 }
             }
         };
     }
 }
+
+
 
 ////                        Log.d(TAG, "tap case 1");
 //                        CourseEntity movingCourse = unscheduledCourses.get(selectedCoursePosition);
