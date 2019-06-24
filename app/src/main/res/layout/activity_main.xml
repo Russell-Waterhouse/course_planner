@@ -4,26 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/background_gradient_square">
 
     <Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_aqua_gradient"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="8dp"
-        android:background="@color/colorPrimaryDark">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/edit"
             android:layout_gravity="start"
-            android:visibility="invisible"
-            />
+            android:text="@string/edit"
+            android:visibility="invisible" />
 
         <!--todo: implement-->
         <EditText
@@ -33,18 +33,20 @@
             android:background="#FFFFFF"
             android:drawableStart="@drawable/ic_search_black_24dp"
             android:hint="@string/search" />
+
         <Button
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delete"
             android:layout_gravity="end"
-            android:visibility="invisible"/>
+            android:text="@string/delete"
+            android:visibility="invisible" />
 
     </Toolbar>
 
     <Button
         android:id="@+id/create_courses_button"
+        style="@style/button_aqua_gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -56,10 +58,12 @@
 
     <Button
         android:id="@+id/view_progress_button"
+        style="@style/button_aqua_gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/background_aqua_gradient"
         android:text="@string/view_progress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -85,6 +89,7 @@
 
     <ListView
         android:id="@+id/bottom_list_view"
+        android:background="@drawable/background__white_rounded_corners"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
