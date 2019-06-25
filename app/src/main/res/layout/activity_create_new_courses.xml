@@ -77,12 +77,15 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/prompt_for_course_id"
         android:importantForAutofill="no"
         android:inputType="textCapCharacters"
+        android:textAlignment="center"
         android:textSize="12sp"
         android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
