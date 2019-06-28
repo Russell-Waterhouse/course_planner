@@ -26,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     MainViewModel viewModel;
-    List<CourseEntity> mCourseList;
-    ArrayList<CourseEntity> unscheduledCourses;
-    ArrayList<CourseEntity> scheduledCourses;
-    ArrayList<ScheduledCourseArrayAdapter> mAdapterList;
+    //todo: move all of these over to the viewmodel
     UnscheduledCourseArrayAdapter bottomAdapter;
     boolean courseIsSelected = false;
     boolean isScheduledCourseSelected = false;
@@ -56,13 +53,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initLists() {
-        unscheduledCourses = new ArrayList<>();
-        scheduledCourses = new ArrayList<>();
-        mAdapterList = new ArrayList<>();
         viewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(List<CourseEntity> courseEntities) {
-                mCourseList = courseEntities;
+//                mCourseList = courseEntities;
+                viewModel.setmCourseList(courseEntities);
                 updateLists();
                 updateViews();
             }
@@ -70,28 +65,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateLists() {
-        unscheduledCourses.clear();
-        scheduledCourses.clear();
-        for (CourseEntity course : mCourseList) {
+        viewModel.getUnscheduledCourses().clear();
+        viewModel.getScheduledCourses().clear();
+        for (CourseEntity course : viewModel.getmCourseList()) {
             if (course.getScheduledYear() == 0 || course.getScheduledSemester() == 'z')
-                unscheduledCourses.add(course);
+                viewModel.getUnscheduledCourses().add(course);
             else
-                scheduledCourses.add(course);
+                viewModel.getScheduledCourses().add(course);
         }
-        if(unscheduledCourses.size()==0){
+        if(viewModel.getUnscheduledCourses().size()==0){
             //todo: animate this later on in a future version
             middleLine.setGuidelinePercent(1f);
         }
         else{
             middleLine.setGuidelinePercent(0.5f);
         }
-//        Log.d(TAG, "Scheduled courses are : " + scheduledCourses.toString());
-//        Log.d(TAG, "unScheduled courses are : " + unscheduledCourses.toString());
     }//tested
 
     private void updateViews() {
-        for (ScheduledCourseArrayAdapter adapter : mAdapterList) {
-            adapter.updateDataSet(scheduledCourses);
+        for (ScheduledCourseArrayAdapter adapter : viewModel.getmAdapterList()) {
+            adapter.updateDataSet(viewModel.getScheduledCourses());
 //            adapter.notifyDataSetChanged();
         }
         bottomAdapter.notifyDataSetChanged();
@@ -100,10 +93,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initBottomListView() {
         bottomListView = findViewById(R.id.bottom_list_view);
-        if(unscheduledCourses.size()==0) {
+        if(viewModel.getUnscheduledCourses().size()==0) {
             middleLine.setGuidelinePercent(1f);
         }
-        bottomAdapter = new UnscheduledCourseArrayAdapter(this, R.layout.course_layout, unscheduledCourses);
+        bottomAdapter = new UnscheduledCourseArrayAdapter(this, R.layout.course_layout, viewModel.getUnscheduledCourses());
         bottomListView.setAdapter(bottomAdapter);
         bottomListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 selectedCoursePosition = position;
                 deleteButton.setVisibility(View.VISIBLE);
                 editButton.setVisibility(View.VISIBLE);
-//                Log.d(TAG, "The selected course is: " + unscheduledCourses.get(position).toString());
+//                Log.d(TAG, "The selected course is: " + viewModel.getUnscheduledCourses().get(position).toString());
             }//tested
         });
     }
@@ -155,10 +148,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     if(!isScheduledCourseSelected){
-                        viewModel.remove(unscheduledCourses.get(selectedCoursePosition));
+                        viewModel.remove(viewModel.getUnscheduledCourses().get(selectedCoursePosition));
                     }
                     else{
-                        viewModel.remove((scheduledCourses.get(selectedCoursePosition)));
+                        viewModel.remove((viewModel.getScheduledCourses().get(selectedCoursePosition)));
                     }
                     deleteButton.setVisibility(View.INVISIBLE);
                     editButton.setVisibility(View.INVISIBLE);
@@ -189,8 +182,8 @@ public class MainActivity extends AppCompatActivity {
             String fallsemesterName = getString(R.string.fall) + " " + i;
             fallName.setText(fallsemesterName);
             ListView fallList = fallLayout.findViewById(R.id.semester_list_view);
-            ScheduledCourseArrayAdapter fallAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'A');
-            mAdapterList.add(fallAdapter);
+            ScheduledCourseArrayAdapter fallAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, viewModel.getScheduledCourses(), i, 'A');
+            viewModel.getmAdapterList().add(fallAdapter);
             fallList.setAdapter(fallAdapter);
             fallList.setOnItemClickListener(getOnItemClickListener(i, 'A', fallList, fallAdapter));
             parentLayout.addView(fallLayout);
@@ -202,8 +195,8 @@ public class MainActivity extends AppCompatActivity {
             springName.setText(springSemesterName);
             springName.setBackgroundColor(getColor(R.color.spring_green));
             ListView springList = springLayout.findViewById(R.id.semester_list_view);
-            ScheduledCourseArrayAdapter springAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'B');
-            mAdapterList.add(springAdapter);
+            ScheduledCourseArrayAdapter springAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, viewModel.getScheduledCourses(), i, 'B');
+            viewModel.getmAdapterList().add(springAdapter);
             springList.setAdapter(springAdapter);
             springList.setOnItemClickListener(getOnItemClickListener(i, 'B', springList, springAdapter));
             parentLayout.addView(springLayout);
@@ -215,8 +208,8 @@ public class MainActivity extends AppCompatActivity {
             summerName.setText(summerSemesterName);
             summerName.setBackgroundColor(getColor(R.color.summer_yellow));
             ListView summerList = summerLayout.findViewById(R.id.semester_list_view);
-            ScheduledCourseArrayAdapter summerAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, scheduledCourses, i, 'C');
-            mAdapterList.add(summerAdapter);
+            ScheduledCourseArrayAdapter summerAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, viewModel.getScheduledCourses(), i, 'C');
+            viewModel.getmAdapterList().add(summerAdapter);
             summerList.setAdapter(summerAdapter);
             summerList.setOnItemClickListener(getOnItemClickListener(i, 'C', summerList, summerAdapter));
             parentLayout.addView(summerLayout);
@@ -235,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                         if (selectedCourseView != null) {
                             courseIsSelected = false;
                             selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
-                            CourseEntity movingCourse = unscheduledCourses.get(selectedCoursePosition);
+                            CourseEntity movingCourse = viewModel.getUnscheduledCourses().get(selectedCoursePosition);
                             movingCourse.setScheduledSemester(scheduledSemester);
                             movingCourse.setScheduledYear(scheduledYear);
                             viewModel.updateCourse(movingCourse);
@@ -249,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
                             courseIsSelected = false;
                             isScheduledCourseSelected = false;
                             selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
-                            CourseEntity movingCourse = scheduledCourses.get(selectedCoursePosition);
+                            CourseEntity movingCourse = viewModel.getScheduledCourses().get(selectedCoursePosition);
                             movingCourse.setScheduledSemester(scheduledSemester);
                             movingCourse.setScheduledYear(scheduledYear);
                             viewModel.updateCourse(movingCourse);
@@ -266,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                         selectedCourseView = view;
                         selectedCourseView.setBackground(getDrawable(R.drawable.background_accent_rounded_corners));
                         isScheduledCourseSelected = true;
-                        selectedCoursePosition = scheduledCourses.indexOf(currentAdapter.getItem(position));
+                        selectedCoursePosition = viewModel.getScheduledCourses().indexOf(currentAdapter.getItem(position));
                         deleteButton.setVisibility(View.VISIBLE);
                         editButton.setVisibility(View.VISIBLE);
 //                    Log.d(TAG, "The selected course is: " + scheduledCourses.get(position).toString());
