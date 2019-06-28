@@ -10,8 +10,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity (tableName = "Courses")
-public class CourseEntity {
+public class CourseEntity implements Serializable {
 
     @PrimaryKey(autoGenerate = false)
     @NonNull

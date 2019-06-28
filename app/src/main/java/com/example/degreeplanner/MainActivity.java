@@ -127,9 +127,20 @@ public class MainActivity extends AppCompatActivity {
                 if(courseIsSelected) {
                     //go  to the editing activity
                     //todo: figure out how to send information from the currently selected course to the activity
-                    startActivity(new Intent(MainActivity.this, CreateNewCourses.class));
+                    Intent intent = new Intent(MainActivity.this, CreateNewCourses.class);
+                    CourseEntity course = null;
+                    if(isScheduledCourseSelected) {
+                        course = viewModel.getScheduledCourses().get(selectedCoursePosition);
+                    }
+                    else {
+                        course = viewModel.getUnscheduledCourses().get(selectedCoursePosition);
+                    }
+                    intent.putExtra("course to edit: ", course);
+                    startActivity(intent);
+                    selectedCourseView.setBackground(getDrawable(R.drawable.background_primary_rounded_corners));
+                    courseIsSelected = false;
                     editButton.setVisibility(View.INVISIBLE);
-                    finish();
+                    deleteButton.setVisibility(View.INVISIBLE);
                 }
                 else{
                     deleteButton.setVisibility(View.INVISIBLE);

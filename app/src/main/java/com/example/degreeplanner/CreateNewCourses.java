@@ -25,7 +25,20 @@ public class CreateNewCourses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_courses);
         viewmodel  = ViewModelProviders.of(this).get(CreateNewCoursesViewmodel.class);
+        Bundle bundleToLoad = getIntent().getExtras();
         initFields();
+        if(bundleToLoad != null){
+            CourseEntity course = (CourseEntity)bundleToLoad.get("course to edit: ");
+            if(course != null){
+                fall.setChecked(course.isOfferedInFall());
+                spring.setChecked(course.isOfferedInSpring());
+                summer.setChecked(course.isOfferedInSummer());
+                courseName.setText(course.getCourseName());
+                prereq1.setText(course.getPrereq1Str());
+                prereq3.setText(course.getPrereq2Str());
+                prereq3.setText(course.getPrereq3Str());
+            }
+        }
 
     }
 
