@@ -28,19 +28,12 @@ public class CreateNewCourses extends AppCompatActivity {
         Bundle bundleToLoad = getIntent().getExtras();
         initFields();
         if(bundleToLoad != null){
-            CourseEntity course = (CourseEntity)bundleToLoad.get("course to edit: ");
-            if(course != null){
-                fall.setChecked(course.isOfferedInFall());
-                spring.setChecked(course.isOfferedInSpring());
-                summer.setChecked(course.isOfferedInSummer());
-                courseName.setText(course.getCourseName());
-                prereq1.setText(course.getPrereq1Str());
-                prereq3.setText(course.getPrereq2Str());
-                prereq3.setText(course.getPrereq3Str());
-            }
+            LoadCourseToUI(bundleToLoad);
         }
 
     }
+
+
 
     private void initFields(){
         fall = findViewById(R.id.checkBoxFall);
@@ -51,6 +44,21 @@ public class CreateNewCourses extends AppCompatActivity {
         prereq2 = findViewById(R.id.prereq_2);
         prereq3 = findViewById(R.id.prereq_3);
     }
+
+    private void LoadCourseToUI(Bundle bundleToLoad) {
+        CourseEntity course = (CourseEntity)bundleToLoad.get("course to edit: ");
+        if(course != null){
+            fall.setChecked(course.isOfferedInFall());
+            spring.setChecked(course.isOfferedInSpring());
+            summer.setChecked(course.isOfferedInSummer());
+            courseName.setText(course.getCourseName());
+            prereq1.setText(course.getPrereq1Str());
+            prereq3.setText(course.getPrereq2Str());
+            prereq3.setText(course.getPrereq3Str());
+        }
+    }
+
+
     public void onClick(View view){
         switch (view.getId()){
             case R.id.add_another_course_button:
