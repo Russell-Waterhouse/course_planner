@@ -27,12 +27,15 @@
 
         <!--todo: implement-->
         <EditText
+            android:id="@+id/search_bar"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="#FFFFFF"
             android:drawableStart="@drawable/ic_search_black_24dp"
-            android:hint="@string/search" />
+            android:hint="@string/search"
+            tools:layout_editor_absoluteX="131dp"
+            tools:layout_editor_absoluteY="16dp" />
 
         <Button
             android:id="@+id/delete_button"

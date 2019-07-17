@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 viewModel.getScheduledCourses().add(course);
         }
         if(viewModel.getUnscheduledCourses().size()==0){
-            //todo: animate this later on in a future version
+            //TODO: animate this later on in a future version
             expandBottomListView();
         }
         else{
