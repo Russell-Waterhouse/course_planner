@@ -30,7 +30,6 @@ public class CreateNewCourses extends AppCompatActivity {
         if(bundleToLoad != null){
             LoadCourseToUI(bundleToLoad);
         }
-
     }
 
 
@@ -75,7 +74,6 @@ public class CreateNewCourses extends AppCompatActivity {
     }
 
     private void saveCourse(){
-        //todo: do this through the view model later
         if(!courseName.getText().toString().equals("")) {
             CourseEntity course = new CourseEntity(courseName.getText().toString(), prereq1.getText().toString(), prereq2.getText().toString(), prereq3.getText().toString(), fall.isChecked(), spring.isChecked(), summer.isChecked(), false, 0.00, null, 0, 'z');
             viewmodel.insertCourse(course);

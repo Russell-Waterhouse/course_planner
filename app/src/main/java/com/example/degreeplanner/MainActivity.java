@@ -21,7 +21,6 @@ import com.example.degreeplanner.Database.CourseEntity;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
 
     MainViewModel viewModel;
     UnscheduledCourseArrayAdapter bottomAdapter;
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(List<CourseEntity> courseEntities) {
-//                mCourseList = courseEntities;
                 viewModel.setmCourseList(courseEntities);
                 updateLists();
                 updateViews();
@@ -92,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
     private void updateViews() {
         for (ScheduledCourseArrayAdapter adapter : viewModel.getmAdapterList()) {
             adapter.updateDataSet(viewModel.getScheduledCourses());
-//            adapter.notifyDataSetChanged();
         }
         bottomAdapter.notifyDataSetChanged();
     }
@@ -109,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectUncheduledCourse(view, position);
-//                Log.d(TAG, "The selected course is: " + viewModel.getUnscheduledCourses().get(position).toString());
             }//tested
         });
     }
@@ -285,7 +281,6 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
-//
 //    /*
 //    todo: the idea right now is that when an item in the bottom ListView gets tapped, it returns the position of that tap
 //    to the main activity. when you then tap on another semester's recycler view, this then removes that item from the array
@@ -295,12 +290,3 @@ public class MainActivity extends AppCompatActivity {
 //    this ListView adapter is fed the semester and year that it represents in the constructor, and then sorts through the
 //    list of scheduled courses to find ones that belong in its display. it then displays them.
 //     */
-//
-//
-//
-//}
-//
-//
-//
-//
-//
