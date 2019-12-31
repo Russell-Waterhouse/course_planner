@@ -20,17 +20,17 @@ import java.util.List;
 public interface CourseDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insert(CourseEntity course);
+    void insert(CourseEntity course);
 
     @Delete
-    public void delete(CourseEntity course);
+    void delete(CourseEntity course);
 
     @Query("DELETE FROM Courses")
-    public void deleteAllCourses();
+    void deleteAllCourses();
 
     @Query("SELECT * FROM Courses")
-    public LiveData<List<CourseEntity>> getAllCourses();
+    LiveData<List<CourseEntity>> getAllCourses();
 
     @Update
-    public void updateCourse(CourseEntity course);//todo: implement
+    void updateCourse(CourseEntity course);//todo: implement
 }

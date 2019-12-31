@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     //go  to the editing activity
                     //todo: figure out how to send information from the currently selected course to the activity
                     Intent intent = new Intent(MainActivity.this, CreateNewCourses.class);
-                    CourseEntity course = null;
+                    CourseEntity course;
                     if(isScheduledCourseSelected) {
                         course = viewModel.getScheduledCourses().get(selectedCoursePosition);
                     }
