@@ -1,4 +1,4 @@
-package com.example.degreeplanner.Adapter;
+package com.example.degreeplanner.ui.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,10 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.degreeplanner.Database.CourseEntity;
 import com.example.degreeplanner.R;
-
-import org.w3c.dom.Text;
+import com.example.degreeplanner.database.CourseEntity;
 
 import java.util.List;
 

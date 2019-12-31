@@ -4,7 +4,7 @@ file purpose: Data access object (DAO) for room database library
 last edited by: Russell Waterhouse May 25
 todo: comment
  */
-package com.example.degreeplanner.Database;
+package com.example.degreeplanner.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

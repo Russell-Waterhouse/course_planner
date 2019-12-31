@@ -1,4 +1,4 @@
-package com.example.degreeplanner;
+package com.example.degreeplanner.ui.create_courses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.example.degreeplanner.Database.CourseEntity;
+import com.example.degreeplanner.R;
+import com.example.degreeplanner.database.CourseEntity;
 
 public class CreateNewCourses extends AppCompatActivity {
     CreateNewCoursesViewmodel viewmodel;

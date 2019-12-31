@@ -4,6 +4,9 @@ import androidx.test.filters.MediumTest;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 
+import com.example.degreeplanner.ui.main.MainActivity;
+import com.example.degreeplanner.ui.main.MainViewModel;
+
 import org.junit.Test;
 import org.mockito.*;
 
@@ -24,7 +27,8 @@ public class MainActivityInstrumentedTest {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
-    @Mock MainViewModel mainViewModel;
+    @Mock
+    MainViewModel mainViewModel;
 
     @InjectMocks MainActivity mainActivity;
 

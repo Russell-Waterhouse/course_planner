@@ -1,7 +1,6 @@
-package com.example.degreeplanner.Adapter;
+package com.example.degreeplanner.ui.main;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.degreeplanner.Database.CourseEntity;
 import com.example.degreeplanner.R;
+import com.example.degreeplanner.database.CourseEntity;
 
 import java.util.ArrayList;
 import java.util.List;

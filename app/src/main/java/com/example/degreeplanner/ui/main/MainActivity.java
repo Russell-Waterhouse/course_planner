@@ -1,4 +1,4 @@
-package com.example.degreeplanner;
+package com.example.degreeplanner.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Guideline;
@@ -14,9 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.degreeplanner.Adapter.ScheduledCourseArrayAdapter;
-import com.example.degreeplanner.Adapter.UnscheduledCourseArrayAdapter;
-import com.example.degreeplanner.Database.CourseEntity;
+import com.example.degreeplanner.R;
+import com.example.degreeplanner.ui.create_courses.CreateNewCourses;
+import com.example.degreeplanner.database.CourseEntity;
 
 import java.util.List;
 
@@ -268,7 +268,6 @@ public class MainActivity extends AppCompatActivity {
                         selectedCoursePosition = viewModel.getScheduledCourses().indexOf(currentAdapter.getItem(position));
                         deleteButton.setVisibility(View.VISIBLE);
                         editButton.setVisibility(View.VISIBLE);
-//                    Log.d(TAG, "The selected course is: " + scheduledCourses.get(position).toString());
                     }
                     //there is just a placeholder "add courses here" button, start the addCoursesActivity
                     else{

@@ -3,7 +3,7 @@ Created may 25 by Russell waterhouse
 file purpose: entity for room database library
 last edited by: Russell Waterhouse May 25
  */
-package com.example.degreeplanner.Database;
+package com.example.degreeplanner.database;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

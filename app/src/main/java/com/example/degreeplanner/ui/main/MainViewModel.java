@@ -1,14 +1,12 @@
-package com.example.degreeplanner;
+package com.example.degreeplanner.ui.main;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.degreeplanner.Adapter.ScheduledCourseArrayAdapter;
-import com.example.degreeplanner.Database.CourseEntity;
-import com.example.degreeplanner.Database.Repository;
+import com.example.degreeplanner.database.CourseEntity;
+import com.example.degreeplanner.database.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
