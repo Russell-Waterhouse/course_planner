@@ -28,6 +28,7 @@
         <!--todo: implement-->
         <EditText
             android:id="@+id/search_bar"
+            android:visibility="gone"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
