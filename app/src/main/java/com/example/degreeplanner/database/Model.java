@@ -29,5 +29,4 @@ public class Model extends Repository{
     public boolean isEditing(){
         return isEditing();
     }
-
 }

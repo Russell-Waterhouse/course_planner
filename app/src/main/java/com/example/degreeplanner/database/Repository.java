@@ -1,7 +1,4 @@
 /*
-Created may 25 by Russell waterhouse
-file purpose: repository for app data. provides a nice API for accessing the data from the rest of the app
-last edited by: Russell Waterhouse May 25
  todo: comment
  */
 
@@ -91,25 +88,4 @@ private static class deleteAllDataAsyncTask extends AsyncTask<Void, Void, Void> 
             return null;
         }
     }
-
-/*
-private static class getCourseAsyncTask extends AsyncTask<String, Void, CourseEntity> {
-        CourseDAO dao;
-    CourseEntity course;
-    getCourseAsyncTask(CourseDAO dao){
-            this.dao = dao;
-        }
-
-        @Override
-        protected CourseEntity doInBackground(String... courseName){
-            course = dao.getCourse(courseName[0]);
-            return course;
-        }
-        @Override
-        protected CourseEntity onPostExecute(){
-            return course;
-        }
-    }*/
-
-
 }

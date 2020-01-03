@@ -18,8 +18,7 @@ import java.util.List;
 
 public class UnscheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity> {
 
-
-    public UnscheduledCourseArrayAdapter(Context context, int resource, @NonNull List<CourseEntity> courses){
+    UnscheduledCourseArrayAdapter(Context context, int resource, @NonNull List<CourseEntity> courses){
         super(context, resource, courses);
     }
 
@@ -61,7 +60,5 @@ public class UnscheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity> {
         }
         return convertView;
     }
-
-
 }
 

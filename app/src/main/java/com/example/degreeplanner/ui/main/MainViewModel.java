@@ -1,3 +1,4 @@
+//TODO: Remove this class and move to the new architecture pattern
 package com.example.degreeplanner.ui.main;
 
 import android.app.Application;
@@ -14,7 +15,7 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
     private Repository repository;
     private LiveData<List<CourseEntity>> allCourses;
-    List<CourseEntity> mCourseList;
+    private List<CourseEntity> mCourseList;
     private ArrayList<CourseEntity> unscheduledCourses;
     private ArrayList<CourseEntity> scheduledCourses;
     private ArrayList<ScheduledCourseArrayAdapter> mAdapterList;
@@ -28,7 +29,7 @@ public class MainViewModel extends AndroidViewModel {
         mAdapterList = new ArrayList<>();
     }
 
-    public LiveData<List<CourseEntity>> getAllCourses(){
+    LiveData<List<CourseEntity>> getAllCourses(){
         return allCourses;
     }
 
@@ -36,23 +37,23 @@ public class MainViewModel extends AndroidViewModel {
         repository.insertCourse(course);
     }
 
-    public void remove(CourseEntity course){
+    void remove(CourseEntity course){
         repository.deleteCourse(course);
     }
 
-    public void updateCourse(CourseEntity courseEntity){
+    void updateCourse(CourseEntity courseEntity){
         repository.updateCourse(courseEntity);
     }
 
-    public List<CourseEntity> getmCourseList() {
+    List<CourseEntity> getmCourseList() {
         return mCourseList;
     }
 
-    public void setmCourseList(List<CourseEntity> mCourseList) {
+    void setmCourseList(List<CourseEntity> mCourseList) {
         this.mCourseList = mCourseList;
     }
 
-    public ArrayList<CourseEntity> getUnscheduledCourses() {
+    ArrayList<CourseEntity> getUnscheduledCourses() {
         return unscheduledCourses;
     }
 
@@ -60,7 +61,7 @@ public class MainViewModel extends AndroidViewModel {
         this.unscheduledCourses = unscheduledCourses;
     }
 
-    public ArrayList<CourseEntity> getScheduledCourses() {
+    ArrayList<CourseEntity> getScheduledCourses() {
         return scheduledCourses;
     }
 
@@ -68,7 +69,7 @@ public class MainViewModel extends AndroidViewModel {
         this.scheduledCourses = scheduledCourses;
     }
 
-    public ArrayList<ScheduledCourseArrayAdapter> getmAdapterList() {
+    ArrayList<ScheduledCourseArrayAdapter> getmAdapterList() {
         return mAdapterList;
     }
 

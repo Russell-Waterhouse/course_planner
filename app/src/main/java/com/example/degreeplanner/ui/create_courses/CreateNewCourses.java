@@ -1,12 +1,12 @@
 package com.example.degreeplanner.ui.create_courses;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.degreeplanner.R;
 import com.example.degreeplanner.database.CourseEntity;
@@ -33,8 +33,6 @@ public class CreateNewCourses extends AppCompatActivity {
         }
     }
 
-
-
     private void initFields(){
         fall = findViewById(R.id.checkBoxFall);
         spring = findViewById(R.id.checkBoxSpring);
@@ -58,7 +56,6 @@ public class CreateNewCourses extends AppCompatActivity {
         }
     }
 
-
     public void onClick(View view){
         switch (view.getId()){
             case R.id.add_another_course_button:
@@ -80,6 +77,7 @@ public class CreateNewCourses extends AppCompatActivity {
             viewmodel.insertCourse(course);
         }
     }
+
     private void resetActivity(){
         courseName.setText(null);
         prereq1.setText(null);

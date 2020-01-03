@@ -24,22 +24,20 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
     private ArrayList<CourseEntity> thisSemesterCourses;
     private int mYear;
     private char mSemester;
-    boolean mIsEmpty = false;
+    private boolean mIsEmpty = false;
 
-    public ScheduledCourseArrayAdapter(@NonNull Context context, int resource, @NonNull List<CourseEntity> courses, int year, char semester){
+    ScheduledCourseArrayAdapter(@NonNull Context context, int resource, @NonNull List<CourseEntity> courses, int year, char semester){
         super(context, resource);
         mYear = year;
         mSemester = semester;
         mContext = context;
         thisSemesterCourses = new ArrayList<>();
-//        Log.d(TAG, "The courseList is: " + courses.toString());
         initThisSemesterCourses(courses, year, semester);
     }
 
     private void initThisSemesterCourses(List<CourseEntity> courses, int year, char semester){
         thisSemesterCourses.clear();
         for(CourseEntity course: courses){
-//            Log.d(TAG, "The course is: "+ course.toString());
             if(course.getScheduledYear()==year && course.getScheduledSemester()==semester)
                 thisSemesterCourses.add(course);
         }
@@ -50,16 +48,13 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
         else{
             mIsEmpty = false;
         }
-
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        Log.d(TAG, "getView called; thisSemesterCourses: "+ thisSemesterCourses.toString());
         if(convertView==null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.course_layout, parent, false);
-//            Log.d(TAG, "getView called");
         }
         CourseEntity course = this.getItem(position);
         TextView courseName = convertView.findViewById(R.id.course_name);
@@ -91,7 +86,6 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
                 summer.setVisibility(View.VISIBLE);
             }
         }
-
         return convertView;
     }
 
@@ -106,7 +100,7 @@ public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
         return thisSemesterCourses.get(position);
     }
 
-    public void updateDataSet(@NonNull List<CourseEntity> courses){
+    void updateDataSet(@NonNull List<CourseEntity> courses){
         initThisSemesterCourses(courses, mYear, mSemester);
         notifyDataSetChanged();
     }

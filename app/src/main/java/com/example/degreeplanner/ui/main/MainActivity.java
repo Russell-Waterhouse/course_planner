@@ -1,10 +1,5 @@
 package com.example.degreeplanner.ui.main;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.Guideline;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,9 +9,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Guideline;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.degreeplanner.R;
-import com.example.degreeplanner.ui.create_courses.CreateNewCourses;
 import com.example.degreeplanner.database.CourseEntity;
+import com.example.degreeplanner.ui.create_courses.CreateNewCourses;
 
 import java.util.List;
 
@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     Button deleteButton;
     Guideline middleLine;
     ListView bottomListView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         bottomAdapter.notifyDataSetChanged();
     }
 
-
     private void initBottomListView() {
         bottomListView = findViewById(R.id.bottom_list_view);
         if(viewModel.getUnscheduledCourses().size()==0) {
@@ -105,12 +103,12 @@ public class MainActivity extends AppCompatActivity {
         bottomListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectUncheduledCourse(view, position);
+                selectUnscheduledCourse(view, position);
             }//tested
         });
     }
 
-    private void selectUncheduledCourse(View view, int position) {
+    private void selectUnscheduledCourse(View view, int position) {
         if (courseIsSelected) {
             //if there is a course selected somewhere else, deselect it
             deselectSelectedCourse();
@@ -188,12 +186,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     public void createCourses(View v) {
         Intent startCreatingCourses = new Intent(this, CreateNewCourses.class);
         startActivity(startCreatingCourses);
     }
-
 
     private void initSemesters() {
         LinearLayout parentLayout = findViewById(R.id.viewgroup_parent);
@@ -221,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
         springList.setOnItemClickListener(getOnItemClickListener(i, b, springList, springAdapter));
         parentLayout.addView(springLayout);
     }
-
 
     private AdapterView.OnItemClickListener getOnItemClickListener(final int scheduledYear, final char scheduledSemester, final ListView currentList, final ScheduledCourseArrayAdapter currentAdapter) {
         return new AdapterView.OnItemClickListener() {
@@ -278,14 +273,12 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 }
+    /*
+      todo: the idea right now is that when an item in the bottom ListView gets tapped, it returns the position of that tap
+    to the main activity. when you then tap on another semester's recycler view, this then removes that item from the array
+    of un scheduled courses, adds it to the array of scheduled courses, and enters the scheduled time into the course entity
 
-
-//    /*
-//    todo: the idea right now is that when an item in the bottom ListView gets tapped, it returns the position of that tap
-//    to the main activity. when you then tap on another semester's recycler view, this then removes that item from the array
-//    of un scheduled courses, adds it to the array of scheduled courses, and enters the scheduled time into the course entity
-//
-//    the list of scheduled courses is fed to a ListView for the semester, which is dynamically created from one class
-//    this ListView adapter is fed the semester and year that it represents in the constructor, and then sorts through the
-//    list of scheduled courses to find ones that belong in its display. it then displays them.
-//     */
+    the list of scheduled courses is fed to a ListView for the semester, which is dynamically created from one class
+    this ListView adapter is fed the semester and year that it represents in the constructor, and then sorts through the
+    list of scheduled courses to find ones that belong in its display. it then displays them.
+     */

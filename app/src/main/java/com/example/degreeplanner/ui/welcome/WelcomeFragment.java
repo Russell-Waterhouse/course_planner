@@ -104,7 +104,6 @@ public class WelcomeFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-
         alert = alertBuilder.show();
         alert.show();
     }

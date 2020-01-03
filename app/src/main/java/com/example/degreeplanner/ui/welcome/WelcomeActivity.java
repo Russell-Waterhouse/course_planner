@@ -31,6 +31,4 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeFragmen
     public void aboutAppButtonPressed(){
 //        TODO: FInish implementation
     }
-
-
 }

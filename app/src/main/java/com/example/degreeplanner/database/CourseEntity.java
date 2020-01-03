@@ -1,8 +1,3 @@
-/*
-Created may 25 by Russell waterhouse
-file purpose: entity for room database library
-last edited by: Russell Waterhouse May 25
- */
 package com.example.degreeplanner.database;
 
 import androidx.annotation.NonNull;
@@ -148,6 +143,7 @@ public class CourseEntity implements Serializable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return "CourseEntity{" +
                 "courseName='" + courseName + '\'' +
