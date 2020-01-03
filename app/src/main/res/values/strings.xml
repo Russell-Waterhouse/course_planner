@@ -18,6 +18,11 @@
     <string name="edit">Edit</string>
     <string name="search">Search</string>
     <string name="view_schedule">View My Schedule</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_app">About the App</string>
+    <string name="new_schedule">New Schedule</string>
+    <string name="deletes_data_title">Warning! Current schedule will be deleted</string>
+    <string name="warning_overwrite">This action will permanently delete your current schedule. This cannot be undone. Are you sure you wish to continue?</string>
+    <string name="confirm_delete">Delete all my data and start a new schedule</string>
+    <string name="do_not_delete">Go back</string>
+    <string name="content_description_launch_icon">Launch Icon for the app</string>
 </resources>

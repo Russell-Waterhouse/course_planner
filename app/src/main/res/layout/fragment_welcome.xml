@@ -16,6 +16,7 @@
             android:layout_height="250dp"
             android:padding="50dp"
             android:src="@mipmap/ic_launcher"
+            android:contentDescription="@string/content_description_launch_icon"
             app:layout_constraintEnd_toEndOf="@+id/view_schedule"
             app:layout_constraintStart_toStartOf="@+id/view_schedule"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +26,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/view_schedule"
+            app:layout_constraintBottom_toTopOf="@+id/new_schedule_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <Button
+            android:id="@+id/about_app_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/about_app"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/new_schedule_button" />
+
+        <Button
+            android:id="@+id/new_schedule_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/new_schedule"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

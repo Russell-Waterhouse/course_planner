@@ -1,14 +1,15 @@
 package com.example.degreeplanner.ui.welcome;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.degreeplanner.R;
 
@@ -21,12 +22,6 @@ import com.example.degreeplanner.R;
  * create an instance of this fragment.
  */
 public class WelcomeFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
 
     private OnWelcomeFragmentInteractionListener mListener;
 
@@ -40,7 +35,6 @@ public class WelcomeFragment extends Fragment {
      *
      * @return A new instance of fragment WelcomeFragment.
      */
-    // TODO: Rename and change types and number of parameters
     static WelcomeFragment newInstance() {
         WelcomeFragment fragment = new WelcomeFragment();
         Bundle args = new Bundle();
@@ -51,9 +45,6 @@ public class WelcomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//          TODO: assign instance variables here
-        }
     }
 
     @Override
@@ -61,6 +52,11 @@ public class WelcomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_welcome, container, false);
+        initViews(view);
+        return view;
+    }
+
+    private void initViews(View view) {
         Button viewSchedule = view.findViewById(R.id.view_schedule);
         viewSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +66,47 @@ public class WelcomeFragment extends Fragment {
                 }
             }
         });
-        return view;
+        Button aboutAppButton = view.findViewById(R.id.about_app_button);
+        aboutAppButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mListener != null){
+                    mListener.aboutAppButtonPressed();
+                }
+            }
+        });
+        Button newScheduleButton = view.findViewById(R.id.new_schedule_button);
+        newScheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                warnOverwrite();
+            }
+        });
+    }
+
+    private void warnOverwrite(){
+        final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext());
+        final AlertDialog alert;
+        alertBuilder.setCancelable(true);
+        alertBuilder.setTitle(R.string.deletes_data_title);
+        alertBuilder.setMessage(R.string.warning_overwrite);
+        alertBuilder.setPositiveButton(R.string.confirm_delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(mListener != null){
+                    mListener.createNewScheduleButtonPressed();
+                }
+            }
+        });
+        alertBuilder.setNegativeButton(R.string.do_not_delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alert = alertBuilder.show();
+        alert.show();
     }
 
     @Override
@@ -101,7 +137,8 @@ public class WelcomeFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnWelcomeFragmentInteractionListener {
-        // TODO: Update argument type and name
         void viewScheduleButtonPressed();
+        void createNewScheduleButtonPressed();
+        void aboutAppButtonPressed();
     }
 }
