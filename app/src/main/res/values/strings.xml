@@ -25,4 +25,8 @@
     <string name="confirm_delete">Delete all my data and start a new schedule</string>
     <string name="do_not_delete">Go back</string>
     <string name="content_description_launch_icon">Launch Icon for the app</string>
+
+    <string name="prompt_select_program">Select your University and Program to get you started</string>
+    <string name="university">University:</string>
+    <string name="program">Program</string>
 </resources>

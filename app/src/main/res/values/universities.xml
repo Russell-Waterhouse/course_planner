@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="universities">
+        <item>Choose a University</item>
+        <item>University of Victoria</item>
+    </string-array>
+</resources>
