@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(List<CourseEntity> courseEntities) {
-                viewModel.setmCourseList(courseEntities);
+                viewModel.setCourseList(courseEntities);
                 updateLists();
                 updateViews();
             }
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateLists() {
         viewModel.getUnscheduledCourses().clear();
         viewModel.getScheduledCourses().clear();
-        for (CourseEntity course : viewModel.getmCourseList()) {
+        for (CourseEntity course : viewModel.getCourseList()) {
             if (course.getScheduledYear() == 0 || course.getScheduledSemester() == 'z')
                 viewModel.getUnscheduledCourses().add(course);
             else
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateViews() {
-        for (ScheduledCourseArrayAdapter adapter : viewModel.getmAdapterList()) {
+        for (ScheduledCourseArrayAdapter adapter : viewModel.getAdapterList()) {
             adapter.updateDataSet(viewModel.getScheduledCourses());
         }
         bottomAdapter.notifyDataSetChanged();
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initSemesters() {
-        LinearLayout parentLayout = findViewById(R.id.viewgroup_parent);
+        LinearLayout parentLayout = findViewById(R.id.view_group_parent);
 
         for (int i = 1; i < 8; i++) {
             //init fall layout
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         springName.setBackgroundColor(getColor(p2));
         ListView springList = springLayout.findViewById(R.id.semester_list_view);
         ScheduledCourseArrayAdapter springAdapter = new ScheduledCourseArrayAdapter(getApplicationContext(), R.layout.course_layout, viewModel.getScheduledCourses(), i, b);
-        viewModel.getmAdapterList().add(springAdapter);
+        viewModel.getAdapterList().add(springAdapter);
         springList.setAdapter(springAdapter);
         springList.setOnItemClickListener(getOnItemClickListener(i, b, springList, springAdapter));
         parentLayout.addView(springLayout);

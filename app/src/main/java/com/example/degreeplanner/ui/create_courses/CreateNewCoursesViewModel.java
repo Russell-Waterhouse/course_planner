@@ -7,10 +7,10 @@ import androidx.lifecycle.AndroidViewModel;
 import com.example.degreeplanner.database.CourseEntity;
 import com.example.degreeplanner.database.Repository;
 
-public class CreateNewCoursesViewmodel extends AndroidViewModel {
+public class CreateNewCoursesViewModel extends AndroidViewModel {
     private Repository repository;
 
-    public CreateNewCoursesViewmodel(Application app) {
+    public CreateNewCoursesViewModel(Application app) {
         super(app);
         repository = new Repository(app);
 

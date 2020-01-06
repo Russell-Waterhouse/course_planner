@@ -15,10 +15,10 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
     private Repository repository;
     private LiveData<List<CourseEntity>> allCourses;
-    private List<CourseEntity> mCourseList;
+    private List<CourseEntity> courseList;
     private ArrayList<CourseEntity> unscheduledCourses;
     private ArrayList<CourseEntity> scheduledCourses;
-    private ArrayList<ScheduledCourseArrayAdapter> mAdapterList;
+    private ArrayList<ScheduledCourseArrayAdapter> adapterList;
 
     public MainViewModel(Application app) {
         super(app);
@@ -26,7 +26,7 @@ public class MainViewModel extends AndroidViewModel {
         allCourses = repository.getAllCourse();
         unscheduledCourses = new ArrayList<>();
         scheduledCourses = new ArrayList<>();
-        mAdapterList = new ArrayList<>();
+        adapterList = new ArrayList<>();
     }
 
     LiveData<List<CourseEntity>> getAllCourses(){
@@ -45,12 +45,12 @@ public class MainViewModel extends AndroidViewModel {
         repository.updateCourse(courseEntity);
     }
 
-    List<CourseEntity> getmCourseList() {
-        return mCourseList;
+    List<CourseEntity> getCourseList() {
+        return courseList;
     }
 
-    void setmCourseList(List<CourseEntity> mCourseList) {
-        this.mCourseList = mCourseList;
+    void setCourseList(List<CourseEntity> courseList) {
+        this.courseList = courseList;
     }
 
     ArrayList<CourseEntity> getUnscheduledCourses() {
@@ -69,11 +69,11 @@ public class MainViewModel extends AndroidViewModel {
         this.scheduledCourses = scheduledCourses;
     }
 
-    ArrayList<ScheduledCourseArrayAdapter> getmAdapterList() {
-        return mAdapterList;
+    ArrayList<ScheduledCourseArrayAdapter> getAdapterList() {
+        return adapterList;
     }
 
-    public void setmAdapterList(ArrayList<ScheduledCourseArrayAdapter> mAdapterList) {
-        this.mAdapterList = mAdapterList;
+    public void setAdapterList(ArrayList<ScheduledCourseArrayAdapter> adapterList) {
+        this.adapterList = adapterList;
     }
 }

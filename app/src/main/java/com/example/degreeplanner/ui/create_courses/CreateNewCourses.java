@@ -12,7 +12,7 @@ import com.example.degreeplanner.R;
 import com.example.degreeplanner.database.CourseEntity;
 
 public class CreateNewCourses extends AppCompatActivity {
-    CreateNewCoursesViewmodel viewmodel;
+    CreateNewCoursesViewModel viewModel;
     CheckBox fall;
     CheckBox spring;
     CheckBox summer;
@@ -25,7 +25,7 @@ public class CreateNewCourses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_courses);
-        viewmodel  = ViewModelProviders.of(this).get(CreateNewCoursesViewmodel.class);
+        viewModel = ViewModelProviders.of(this).get(CreateNewCoursesViewModel.class);
         Bundle bundleToLoad = getIntent().getExtras();
         initFields();
         if(bundleToLoad != null){
@@ -38,7 +38,7 @@ public class CreateNewCourses extends AppCompatActivity {
         spring = findViewById(R.id.checkBoxSpring);
         summer = findViewById(R.id.checkBoxSummer);
         courseName = findViewById(R.id.course_id);
-        prereq1 = findViewById(R.id.prereq_1);//todo: make this into a loopview with all the names of courses already entered into it
+        prereq1 = findViewById(R.id.prereq_1);//todo: make this into a loopView with all the names of courses already entered into it
         prereq2 = findViewById(R.id.prereq_2);
         prereq3 = findViewById(R.id.prereq_3);
     }
@@ -74,7 +74,7 @@ public class CreateNewCourses extends AppCompatActivity {
     private void saveCourse(){
         if(!courseName.getText().toString().equals("")) {
             CourseEntity course = new CourseEntity(courseName.getText().toString(), prereq1.getText().toString(), prereq2.getText().toString(), prereq3.getText().toString(), fall.isChecked(), spring.isChecked(), summer.isChecked(), false, 0.00, null, 0, 'z');
-            viewmodel.insertCourse(course);
+            viewModel.insertCourse(course);
         }
     }
 

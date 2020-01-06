@@ -14,7 +14,7 @@ import java.util.List;
 public interface CourseDAO {
 
     /**
-     * inserts a coutseEntity into the SQLite database
+     * inserts a courseEntity into the SQLite database
      * @param course the courseEntity to be inserted into the database
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)

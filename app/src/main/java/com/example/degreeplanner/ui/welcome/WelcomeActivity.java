@@ -40,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity
 
     @Override
     public void aboutAppButtonPressed(){
-//        TODO: FInish implementation
+//        TODO: Finish implementation
     }
 
     @Override
