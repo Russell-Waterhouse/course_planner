@@ -12,9 +12,11 @@ import com.example.degreeplanner.ui.main.MainActivity;
 
 public class WelcomeActivity extends AppCompatActivity
         implements WelcomeFragment.OnWelcomeFragmentInteractionListener,
-        NewScheduleFragment.OnFragmentInteractionListener {
+        NewScheduleFragment.OnFragmentInteractionListener,
+        AboutAppFragment.OnFragmentInteractionListener{
     private final String welcomeFragmentTAG = "WELCOME_FRAGMENT";
     private final String newScheduleFragmentTAG = "NEW_SCHEDULE";
+    private final String aboutAppFragmentTAG = "ABOUT_APP";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,11 @@ public class WelcomeActivity extends AppCompatActivity
 
     @Override
     public void aboutAppButtonPressed(){
-//        TODO: Finish implementation
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment currentFragment = manager.findFragmentByTag(welcomeFragmentTAG);
+        if (currentFragment != null){
+            manager.beginTransaction().hide(currentFragment).add(R.id.frame, AboutAppFragment.newInstance(), aboutAppFragmentTAG).commit();
+        }
     }
 
     @Override
@@ -51,5 +57,16 @@ public class WelcomeActivity extends AppCompatActivity
     @Override
     public void createScheduleFromTemplate() {
 //      TODO: finish method
+    }
+
+    @Override
+    public void closeAboutAppScreen(){
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment aboutAppFragment = manager.findFragmentByTag(aboutAppFragmentTAG);
+        Fragment welcomeFragment = manager.findFragmentByTag(welcomeFragmentTAG);
+        if (aboutAppFragment != null && welcomeFragment != null){
+            manager.beginTransaction().remove(aboutAppFragment).show(welcomeFragment).commit();
+        }
+
     }
 }

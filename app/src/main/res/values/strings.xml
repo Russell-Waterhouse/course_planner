@@ -29,4 +29,7 @@
     <string name="prompt_select_program">Select your University and Program to get you started</string>
     <string name="university">University:</string>
     <string name="program">Program</string>
+
+    <string name="about_the_development">Development</string>
+    <string name="about_open_source">Open Source Contributions</string>
 </resources>
