@@ -18,5 +18,10 @@
         <activity android:name=".ui.create_courses.CreateNewCourses" />
         <activity android:name=".ui.main.MainActivity"/>
     </application>
-
+<!--
+todo list for release of version 2.0
+    todo: implement about the app button
+    todo: implement new schedule button
+    todo: implement instructions
+    -->
 </manifest>

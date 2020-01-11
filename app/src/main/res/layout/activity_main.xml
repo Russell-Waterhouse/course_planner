@@ -62,8 +62,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+<!--    TODO: implement for a future update-->
     <Button
         android:id="@+id/view_progress_button"
+        android:visibility="gone"
         style="@style/button_aqua_gradient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,14 +97,14 @@
 
     <ListView
         android:id="@+id/bottom_list_view"
-        android:background="@drawable/background__white_rounded_corners"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/view_progress_button"
+        android:background="@drawable/background__white_rounded_corners"
+        app:layout_constraintBottom_toTopOf="@+id/create_courses_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/divider_guideline" />
