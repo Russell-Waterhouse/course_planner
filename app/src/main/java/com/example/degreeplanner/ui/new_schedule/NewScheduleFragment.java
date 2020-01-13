@@ -1,4 +1,4 @@
-package com.example.degreeplanner.ui.welcome;
+package com.example.degreeplanner.ui.new_schedule;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.degreeplanner.R;
@@ -36,7 +37,7 @@ public class NewScheduleFragment extends Fragment implements AdapterView.OnItemS
      *
      * @return A new instance of fragment NewScheduleFragment.
      */
-    static NewScheduleFragment newInstance() {
+    public static NewScheduleFragment newInstance() {
         NewScheduleFragment fragment = new NewScheduleFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -82,13 +83,13 @@ public class NewScheduleFragment extends Fragment implements AdapterView.OnItemS
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnDevelopmentFragmentInteractionListener");
         }
     }
 

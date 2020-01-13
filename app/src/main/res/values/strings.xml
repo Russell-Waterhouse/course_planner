@@ -32,4 +32,6 @@
 
     <string name="about_the_development">Development</string>
     <string name="about_open_source">Open Source Contributions</string>
+    <string name="title_activity_about_app">AboutAppActivity</string>
+
 </resources>
