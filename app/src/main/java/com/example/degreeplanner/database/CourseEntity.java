@@ -6,6 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity (tableName = "Courses")
 public class CourseEntity implements Serializable {
@@ -159,5 +160,29 @@ public class CourseEntity implements Serializable {
                 ", scheduledYear=" + scheduledYear +
                 ", scheduledSemester=" + scheduledSemester +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CourseEntity)) return false;
+        CourseEntity that = (CourseEntity) o;
+        return offeredInFall == that.offeredInFall &&
+                offeredInSpring == that.offeredInSpring &&
+                offeredInSummer == that.offeredInSummer &&
+                completed == that.completed &&
+                Double.compare(that.numberGrade, numberGrade) == 0 &&
+                scheduledYear == that.scheduledYear &&
+                scheduledSemester == that.scheduledSemester &&
+                courseName.equals(that.courseName) &&
+                Objects.equals(prereq1Str, that.prereq1Str) &&
+                Objects.equals(prereq2Str, that.prereq2Str) &&
+                Objects.equals(prereq3Str, that.prereq3Str) &&
+                Objects.equals(letterGrade, that.letterGrade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseName, prereq1Str, prereq2Str, prereq3Str, offeredInFall, offeredInSpring, offeredInSummer, completed, numberGrade, letterGrade, scheduledYear, scheduledSemester);
     }
 }
