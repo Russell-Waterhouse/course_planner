@@ -4,25 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.degreeplanner.R;
 import com.example.degreeplanner.ui.about_app.AboutAppActivity;
 import com.example.degreeplanner.ui.main.MainActivity;
-import com.example.degreeplanner.ui.new_schedule.NewScheduleFragment;
 
 public class WelcomeActivity extends AppCompatActivity
-        implements WelcomeFragment.OnWelcomeFragmentInteractionListener,
-        NewScheduleFragment.OnFragmentInteractionListener {
-    private final String welcomeFragmentTAG = "WELCOME_FRAGMENT";
-    private final String newScheduleFragmentTAG = "NEW_SCHEDULE";
+        implements WelcomeFragment.OnWelcomeFragmentInteractionListener{
+
+    private WelcomeViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        viewModel = ViewModelProviders.of(this).get(WelcomeViewModel.class);
         FragmentManager manager = getSupportFragmentManager();
+        String welcomeFragmentTAG = "WELCOME_FRAGMENT";
         manager.beginTransaction().add(R.id.frame, WelcomeFragment.newInstance(), welcomeFragmentTAG).commit();
     }
 
@@ -33,25 +33,13 @@ public class WelcomeActivity extends AppCompatActivity
 
     @Override
     public void createNewScheduleButtonPressed(){
-        FragmentManager manager = getSupportFragmentManager();
-        Fragment currentFragment = manager.findFragmentByTag(welcomeFragmentTAG);
-        if (currentFragment != null) {
-            manager.beginTransaction().hide(currentFragment).add(R.id.frame, NewScheduleFragment.newInstance(), newScheduleFragmentTAG).commit();
-        }
+        viewModel.deleteAllData();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
     }
 
     @Override
     public void aboutAppButtonPressed(){
-        startActivity(new Intent(this, AboutAppActivity.class));
-    }
-
-    @Override
-    public void createScheduleFromScratch() {
-//        TODO: Finish method
-    }
-
-    @Override
-    public void createScheduleFromTemplate() {
-//      TODO: finish method
+        startActivity(new Intent(getApplicationContext(), AboutAppActivity.class));
     }
 }

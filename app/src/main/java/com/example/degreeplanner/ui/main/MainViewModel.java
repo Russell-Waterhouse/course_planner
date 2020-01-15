@@ -1,4 +1,3 @@
-//TODO: Remove this class and move to the new architecture pattern
 package com.example.degreeplanner.ui.main;
 
 import android.app.Application;

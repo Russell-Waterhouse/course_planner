@@ -1,7 +1,3 @@
-/*
- todo: comment
- */
-
 package com.example.degreeplanner.database;
 
 import android.content.Context;
