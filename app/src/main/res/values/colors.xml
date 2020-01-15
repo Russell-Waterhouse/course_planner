@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#5CACEB</color>
+    <color name="colorPrimaryDark">#92374D</color>
+    <color name="colorPrimary">#8C5383</color>
+    <color name="colorAccent">#86A5D9</color>
+    <color name="colorAccentDark">#4A5899</color>
+    <color name="white">#FFFFFF</color>
+
     <color name="fall_orange">#ff853f</color>
     <color name="spring_green">#00ff7f</color>
     <color name="summer_yellow">#ffeb83</color>
-    <color name="aqua">#00FFFF</color>
-    <color name="half_aqua">#00BBBB</color>
+
+    <color name="grey_dark">#222222</color>
+    <color name="grey_medium">#666666</color>
+    <color name="grey_light">#CCCCCC</color>
 </resources>

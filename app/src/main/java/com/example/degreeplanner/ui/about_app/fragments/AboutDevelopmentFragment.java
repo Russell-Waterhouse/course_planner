@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -49,7 +50,15 @@ public class AboutDevelopmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_development, container, false);
+        View view = inflater.inflate(R.layout.fragment_about_development, container, false);
+        Button seeCode = view.findViewById(R.id.see_code_button);
+        seeCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.seeSourceButtonPushed();
+            }
+        });
+        return view;
     }
 
     @Override
@@ -80,6 +89,6 @@ public class AboutDevelopmentFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnDevelopmentFragmentInteractionListener {
-
+        void seeSourceButtonPushed();
     }
 }

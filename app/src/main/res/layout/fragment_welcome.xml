@@ -23,6 +23,7 @@
 
         <Button
             android:id="@+id/view_schedule"
+            style="@style/button_accent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/view_schedule"
@@ -33,6 +34,7 @@
 
         <Button
             android:id="@+id/about_app_button"
+            style="@style/button_accent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/about_app"
@@ -43,6 +45,7 @@
 
         <Button
             android:id="@+id/new_schedule_button"
+            style="@style/button_accent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/new_schedule"

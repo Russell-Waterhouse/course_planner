@@ -1,16 +1,19 @@
 package com.example.degreeplanner.ui.about_app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.degreeplanner.R;
 import com.example.degreeplanner.ui.about_app.fragments.AboutDevelopmentFragment;
 import com.example.degreeplanner.ui.about_app.fragments.OpenSourceContributionsFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Objects;
 
 
 public class AboutAppActivity extends AppCompatActivity
@@ -26,13 +29,15 @@ public class AboutAppActivity extends AppCompatActivity
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.about_app);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        }
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+    @Override
+    public void seeSourceButtonPushed() {
+        Intent seeCodeIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.link_to_code)));
+        startActivity(seeCodeIntent);
     }
 }

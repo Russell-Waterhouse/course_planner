@@ -33,5 +33,10 @@
     <string name="about_the_development">Development</string>
     <string name="about_open_source">Open Source Contributions</string>
     <string name="title_activity_about_app">AboutAppActivity</string>
+    <string name="see_code">See the source code</string>
+    <string name="about_app_string">This app was created to help students plan what semester to take required courses so they complete their degree on time</string>
+    <string name="about_developer_string">This app was developed by Russell Waterhouse, A Software Engineering student at the University of Victoria</string>
+    <string name="about_code_string">If you are interested in this project, you can look at the source code by pressing the button below!</string>
+    <string name="link_to_code">https://github.com/Russell-Waterhouse/course_planner</string>
 
 </resources>
