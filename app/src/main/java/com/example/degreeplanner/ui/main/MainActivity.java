@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deselectSelectedCourse() {
-        int deselectedCourseDrawableResource = R.drawable.background_primary_rounded_corners;
+        int deselectedCourseDrawableResource = R.drawable.background_accent_dark_rounded_corners;
         selectedCourseView.setBackground(getDrawable(deselectedCourseDrawableResource));
     }
 
