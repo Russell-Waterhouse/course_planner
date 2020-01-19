@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -49,7 +50,35 @@ public class OpenSourceContributionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_open_source_contributions, container, false);
+        View view = inflater.inflate(R.layout.fragment_open_source_contributions, container, false);
+        Button androidSdk = view.findViewById(R.id.android_sdk);
+        androidSdk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null){
+                    mListener.androidSdkButtonPressed();
+                }
+            }
+        });
+        Button lifeCycleButton = view.findViewById(R.id.live_data);
+        lifeCycleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null){
+                    mListener.liveDataLibraryButtonPressed();
+                }
+            }
+        });
+        Button roomButton = view.findViewById(R.id.room_persistence);
+        roomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.roomLibraryButtonPressed();
+                }
+            }
+        });
+        return view;
     }
 
     @Override
@@ -80,5 +109,8 @@ public class OpenSourceContributionsFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnOpenSourceFragmentInteractionListener {
+        void androidSdkButtonPressed();
+        void roomLibraryButtonPressed();
+        void liveDataLibraryButtonPressed();
     }
 }

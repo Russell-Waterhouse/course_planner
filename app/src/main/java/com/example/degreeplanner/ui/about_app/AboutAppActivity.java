@@ -40,4 +40,22 @@ public class AboutAppActivity extends AppCompatActivity
         Intent seeCodeIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.link_to_code)));
         startActivity(seeCodeIntent);
     }
+
+    @Override
+    public void androidSdkButtonPressed() {
+        Intent androidInBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.android_sdk_url)));
+        startActivity(androidInBrowser);
+    }
+
+    @Override
+    public void roomLibraryButtonPressed() {
+        Intent roomInBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.room_url)));
+        startActivity(roomInBrowser);
+    }
+
+    @Override
+    public void liveDataLibraryButtonPressed() {
+        Intent liveDataInBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.lifecycle_library_url)));
+        startActivity(liveDataInBrowser);
+    }
 }

@@ -27,8 +27,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation 'org.mockito:mockito-core:3.0.0'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
 
     //room dependencies
@@ -39,9 +37,6 @@ dependencies {
 
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
-
-    // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation "androidx.room:room-guava:$room_version"
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
@@ -74,16 +69,5 @@ dependencies {
 
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
 
-    //mockito
-    // required if you want to use Mockito for unit tests
-//    testImplementation 'org.mockito:mockito-core:2.19.0'
-    // required if you want to use Mockito for Android tests
-    androidTestImplementation 'org.mockito:mockito-android:3.0.0'
-//    androidTestImplementation 'org.mockito:mockito-core:2.19.0'
-
-    //dagger
-    implementation 'com.google.dagger:dagger:2.4'
-//    androidTestImplementation
-    annotationProcessor "com.google.dagger:dagger-compiler:2.4"
     implementation 'com.google.android.material:material:1.0.0'
 }
