@@ -73,6 +73,5 @@ dependencies {
 //    TODO: add library to open source fragment
     implementation 'com.google.android.material:material:1.0.0'
 
-//    TODO: add library to open source fragment
     androidTestImplementation('androidx.test.espresso:espresso-core:3.2.0')
 }

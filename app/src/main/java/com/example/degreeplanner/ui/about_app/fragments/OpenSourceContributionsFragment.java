@@ -112,5 +112,6 @@ public class OpenSourceContributionsFragment extends Fragment {
         void androidSdkButtonPressed();
         void roomLibraryButtonPressed();
         void liveDataLibraryButtonPressed();
+        void espressoLibraryButtonPressed();
     }
 }

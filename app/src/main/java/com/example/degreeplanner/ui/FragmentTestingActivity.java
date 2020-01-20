@@ -14,6 +14,7 @@ public class FragmentTestingActivity extends AppCompatActivity
     boolean androidSdkButtonPressed = false;
     boolean roomLibraryButtonPressed = false;
     boolean liveDataButtonPressed = false;
+    boolean espressoButtonPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,11 @@ public class FragmentTestingActivity extends AppCompatActivity
         liveDataButtonPressed = true;
     }
 
+    @Override
+    public void espressoLibraryButtonPressed() {
+        espressoButtonPressed = true;
+    }
+
     public boolean isAndroidSdkButtonPressed() {
         return androidSdkButtonPressed;
     }
@@ -50,5 +56,9 @@ public class FragmentTestingActivity extends AppCompatActivity
 
     public boolean isLiveDataButtonPressed() {
         return liveDataButtonPressed;
+    }
+
+    public boolean isEspressoButtonPressed() {
+        return espressoButtonPressed;
     }
 }

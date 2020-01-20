@@ -39,7 +39,6 @@
     <string name="about_code_string">If you are interested in this project, you can look at the source code by pressing the button below!</string>
     <string name="link_to_code">https://github.com/Russell-Waterhouse/course_planner</string>
     <string name="thank_open_source">The developer would like to thank the following Open Source contributions</string>
-    <string name="apache_2_license_url">http://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="click_links_prompt">Tap on the button to find out more about each contribution that helped make this project possible</string>
 
     <!--    Open source strings-->
@@ -49,6 +48,7 @@
     <string name="room_url">https://developer.android.com/jetpack/androidx/releases/room</string>
     <string name="lifecycle_library">Lifecycle Components</string>
     <string name="lifecycle_library_url">https://developer.android.com/reference/androidx/lifecycle/package-summary.html</string>
-
+    <string name="espresso_library">Espresso Testing Library</string>
+    <string name="espresso_url">https://developer.android.com/training/testing/ui-testing/espresso-testing</string>
 
 </resources>

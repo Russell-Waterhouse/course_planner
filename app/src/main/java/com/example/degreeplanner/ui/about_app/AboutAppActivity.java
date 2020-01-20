@@ -58,4 +58,10 @@ public class AboutAppActivity extends AppCompatActivity
         Intent liveDataInBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.lifecycle_library_url)));
         startActivity(liveDataInBrowser);
     }
+
+    @Override
+    public void espressoLibraryButtonPressed() {
+        Intent espressoInBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.espresso_url)));
+        startActivity(espressoInBrowser);
+    }
 }
