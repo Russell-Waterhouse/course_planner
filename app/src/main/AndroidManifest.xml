@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".ui.create_courses.CreateNewCourses" />
         <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.FragmentTestingActivity"/>
     </application>
 
 </manifest>
