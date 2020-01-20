@@ -42,7 +42,7 @@
     <string name="apache_2_license_url">http://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="click_links_prompt">Tap on the button to find out more about each contribution that helped make this project possible</string>
 
-<!--    Open source strings-->
+    <!--    Open source strings-->
     <string name="android_sdk">The android open source project</string>
     <string name="android_sdk_url">https://source.android.com/</string>
     <string name="room_library">Room Persistence Library</string>

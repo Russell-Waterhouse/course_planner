@@ -12,8 +12,8 @@
         <activity
             android:name=".ui.about_app.AboutAppActivity"
             android:label="@string/title_activity_about_app"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".ui.welcome.WelcomeActivity"/>
+            android:parentActivityName=".ui.welcome.WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

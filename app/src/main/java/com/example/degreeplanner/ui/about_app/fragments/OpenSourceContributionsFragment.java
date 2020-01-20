@@ -88,7 +88,7 @@ public class OpenSourceContributionsFragment extends Fragment {
             mListener = (OnOpenSourceFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnDevelopmentFragmentInteractionListener");
+                    + " must implement OnOpenSourceFragmentInteractionListener");
         }
     }
 
