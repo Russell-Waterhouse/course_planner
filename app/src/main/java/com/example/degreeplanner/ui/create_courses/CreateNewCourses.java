@@ -38,7 +38,7 @@ public class CreateNewCourses extends AppCompatActivity {
         spring = findViewById(R.id.checkBoxSpring);
         summer = findViewById(R.id.checkBoxSummer);
         courseName = findViewById(R.id.course_id);
-        prereq1 = findViewById(R.id.prereq_1);//todo: make this into a loopView with all the names of courses already entered into it
+        prereq1 = findViewById(R.id.prereq_1);
         prereq2 = findViewById(R.id.prereq_2);
         prereq3 = findViewById(R.id.prereq_3);
     }
