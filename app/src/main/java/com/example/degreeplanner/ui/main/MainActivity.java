@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     Button deleteButton;
     Guideline middleLine;
     ListView bottomListView;
+    TextView hints;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         middleLine = findViewById(R.id.divider_guideline);
+        hints = findViewById(R.id.action_hints);
         init();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        hints.setText(R.string.tap_course_hint);
     }
 
     private void init() {
@@ -121,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         selectedCoursePosition = position;
         deleteButton.setVisibility(View.VISIBLE);
         editButton.setVisibility(View.VISIBLE);
+        hints.setText(R.string.tap_semester_hint);
     }
 
     private void deselectSelectedCourse() {
@@ -136,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(courseIsSelected) {
                     //go  to the editing activity
-                    //todo: figure out how to send information from the currently selected course to the activity
                     Intent intent = new Intent(MainActivity.this, CreateNewCourses.class);
                     CourseEntity course;
                     if(isScheduledCourseSelected) {
@@ -181,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
                     courseIsSelected = false;
                     selectedCoursePosition = 0;
                     selectedCourseView = null;
+                    hints.setText(R.string.tap_course_hint);
                 }
             }
         });
@@ -235,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                             viewModel.updateCourse(movingCourse);
                             deleteButton.setVisibility(View.INVISIBLE);
                             editButton.setVisibility(View.INVISIBLE);
+                            hints.setText(R.string.tap_course_hint);
                         }
                     }
                     //a scheduled course is selected, move it here
@@ -249,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
                             viewModel.updateCourse(movingCourse);
                             deleteButton.setVisibility(View.INVISIBLE);
                             editButton.setVisibility(View.INVISIBLE);
+                            hints.setText(R.string.tap_course_hint);
                         }
                     }
                 }
@@ -263,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
                         selectedCoursePosition = viewModel.getScheduledCourses().indexOf(currentAdapter.getItem(position));
                         deleteButton.setVisibility(View.VISIBLE);
                         editButton.setVisibility(View.VISIBLE);
+                        hints.setText(R.string.tap_semester_hint);
                     }
                     //there is just a placeholder "add courses here" button, start the addCoursesActivity
                     else{

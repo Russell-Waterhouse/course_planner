@@ -13,41 +13,41 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccentDark"
         android:padding="4dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            style="@style/button_accent"
             android:id="@+id/edit_button"
+            style="@style/button_accent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/edit"
             android:visibility="invisible" />
 
-        <!--todo: implement-->
-        <EditText
-            android:id="@+id/search_bar"
-            android:visibility="gone"
-            android:layout_width="150dp"
+        <TextView
+            android:id="@+id/action_hints"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#FFFFFF"
-            android:drawableStart="@drawable/ic_search_black_24dp"
-            android:hint="@string/search"
-            android:autofillHints="@string/search"
-            android:inputType="text"
-            tools:layout_editor_absoluteX="131dp"
-            tools:layout_editor_absoluteY="16dp" />
+            android:text="@string/tap_course_hint"
+            android:gravity="center"
+            android:foregroundGravity="center"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/delete_button"
+            app:layout_constraintStart_toEndOf="@+id/edit_button"
+            tools:layout_editor_absoluteY="19dp" />
+
 
         <Button
             android:id="@+id/delete_button"
             style="@style/button_accent"
-            android:layout_marginEnd="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
             android:text="@string/delete"
             android:visibility="invisible" />
 
