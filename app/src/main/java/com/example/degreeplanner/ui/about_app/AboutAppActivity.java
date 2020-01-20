@@ -64,4 +64,10 @@ public class AboutAppActivity extends AppCompatActivity
         Intent espressoInBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.espresso_url)));
         startActivity(espressoInBrowser);
     }
+
+    @Override
+    public void materialLibraryButtonPressed() {
+        Intent materialInBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.material_url)));
+        startActivity(materialInBrowser);
+    }
 }

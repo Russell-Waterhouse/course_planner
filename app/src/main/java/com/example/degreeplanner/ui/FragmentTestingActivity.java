@@ -46,6 +46,11 @@ public class FragmentTestingActivity extends AppCompatActivity
         espressoButtonPressed = true;
     }
 
+    @Override
+    public void materialLibraryButtonPressed() {
+//        TODO: Finish method
+    }
+
     public boolean isAndroidSdkButtonPressed() {
         return androidSdkButtonPressed;
     }
@@ -61,4 +66,6 @@ public class FragmentTestingActivity extends AppCompatActivity
     public boolean isEspressoButtonPressed() {
         return espressoButtonPressed;
     }
+
+
 }

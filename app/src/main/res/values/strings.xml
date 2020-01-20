@@ -50,5 +50,6 @@
     <string name="lifecycle_library_url">https://developer.android.com/reference/androidx/lifecycle/package-summary.html</string>
     <string name="espresso_library">Espresso Testing Library</string>
     <string name="espresso_url">https://developer.android.com/training/testing/ui-testing/espresso-testing</string>
-
+    <string name="material_library">Material Design Library</string>
+    <string name="material_url">https://github.com/material-components/material-components-android</string>
 </resources>

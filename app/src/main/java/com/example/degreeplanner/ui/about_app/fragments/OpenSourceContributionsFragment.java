@@ -78,6 +78,24 @@ public class OpenSourceContributionsFragment extends Fragment {
                 }
             }
         });
+        Button espressoButton = view.findViewById(R.id.espresso_library);
+        espressoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.espressoLibraryButtonPressed();
+                }
+            }
+        });
+        Button materialButton = view.findViewById(R.id.material_library);
+        materialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null){
+                    mListener.materialLibraryButtonPressed();
+                }
+            }
+        });
         return view;
     }
 
@@ -113,5 +131,6 @@ public class OpenSourceContributionsFragment extends Fragment {
         void roomLibraryButtonPressed();
         void liveDataLibraryButtonPressed();
         void espressoLibraryButtonPressed();
+        void materialLibraryButtonPressed();
     }
 }
