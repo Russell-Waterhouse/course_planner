@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.degreeplanner.R;
+import java.security.InvalidParameterException;
+
+import ca.russell_waterhouse.degreeplanner.R;
 import ca.russell_waterhouse.degreeplanner.ui.about_app.fragments.AboutDevelopmentFragment;
 import ca.russell_waterhouse.degreeplanner.ui.about_app.fragments.OpenSourceContributionsFragment;
-
-import java.security.InvalidParameterException;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.degreeplanner.R;
+import ca.russell_waterhouse.degreeplanner.R;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -11,11 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.degreeplanner.R;
-import ca.russell_waterhouse.degreeplanner.database.CourseEntity;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import ca.russell_waterhouse.degreeplanner.R;
+import ca.russell_waterhouse.degreeplanner.database.CourseEntity;
 
 public class ScheduledCourseArrayAdapter extends ArrayAdapter<CourseEntity>{
     private static final String TAG = "ScheduledCourseArrayAda";

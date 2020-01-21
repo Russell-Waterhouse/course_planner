@@ -8,12 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.degreeplanner.R;
-import ca.russell_waterhouse.degreeplanner.ui.about_app.fragments.AboutDevelopmentFragment;
-import ca.russell_waterhouse.degreeplanner.ui.about_app.fragments.OpenSourceContributionsFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.Objects;
+
+import ca.russell_waterhouse.degreeplanner.R;
+import ca.russell_waterhouse.degreeplanner.ui.about_app.fragments.AboutDevelopmentFragment;
+import ca.russell_waterhouse.degreeplanner.ui.about_app.fragments.OpenSourceContributionsFragment;
 
 
 public class AboutAppActivity extends AppCompatActivity

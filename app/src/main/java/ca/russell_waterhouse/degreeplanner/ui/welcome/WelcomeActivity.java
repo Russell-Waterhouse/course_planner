@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.degreeplanner.R;
+import ca.russell_waterhouse.degreeplanner.R;
 import ca.russell_waterhouse.degreeplanner.ui.about_app.AboutAppActivity;
 import ca.russell_waterhouse.degreeplanner.ui.main.MainActivity;
 

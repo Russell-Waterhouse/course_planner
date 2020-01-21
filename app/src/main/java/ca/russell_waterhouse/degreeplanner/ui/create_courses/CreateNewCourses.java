@@ -8,7 +8,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.degreeplanner.R;
+import ca.russell_waterhouse.degreeplanner.R;
 import ca.russell_waterhouse.degreeplanner.database.CourseEntity;
 
 public class CreateNewCourses extends AppCompatActivity {

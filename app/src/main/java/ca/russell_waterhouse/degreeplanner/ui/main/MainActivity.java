@@ -14,11 +14,11 @@ import androidx.constraintlayout.widget.Guideline;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.degreeplanner.R;
+import java.util.List;
+
+import ca.russell_waterhouse.degreeplanner.R;
 import ca.russell_waterhouse.degreeplanner.database.CourseEntity;
 import ca.russell_waterhouse.degreeplanner.ui.create_courses.CreateNewCourses;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

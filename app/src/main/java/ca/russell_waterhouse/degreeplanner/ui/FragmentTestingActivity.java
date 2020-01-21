@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.degreeplanner.R;
+import ca.russell_waterhouse.degreeplanner.R;
 import ca.russell_waterhouse.degreeplanner.ui.about_app.fragments.OpenSourceContributionsFragment;
 
 public class FragmentTestingActivity extends AppCompatActivity

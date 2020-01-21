@@ -4,13 +4,13 @@ import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.rule.ActivityTestRule;
 
-import com.example.degreeplanner.R;
-import ca.russell_waterhouse.degreeplanner.ui.FragmentTestingActivity;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import ca.russell_waterhouse.degreeplanner.R;
+import ca.russell_waterhouse.degreeplanner.ui.FragmentTestingActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
