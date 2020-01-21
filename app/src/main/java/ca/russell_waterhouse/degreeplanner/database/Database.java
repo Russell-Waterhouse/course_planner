@@ -1,4 +1,4 @@
-package com.example.degreeplanner.database;
+package ca.russell_waterhouse.degreeplanner.database;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.example.degreeplanner;
+package ca.russell_waterhouse.degreeplanner;
 
 import org.junit.Test;
 

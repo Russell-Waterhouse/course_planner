@@ -1,4 +1,4 @@
-package com.example.degreeplanner.ui.main;
+package ca.russell_waterhouse.degreeplanner.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +15,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.degreeplanner.R;
-import com.example.degreeplanner.database.CourseEntity;
-import com.example.degreeplanner.ui.create_courses.CreateNewCourses;
+import ca.russell_waterhouse.degreeplanner.database.CourseEntity;
+import ca.russell_waterhouse.degreeplanner.ui.create_courses.CreateNewCourses;
 
 import java.util.List;
 

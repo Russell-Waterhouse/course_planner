@@ -1,4 +1,4 @@
-package com.example.degreeplanner.ui.about_app.fragments;
+package ca.russell_waterhouse.degreeplanner.ui.about_app.fragments;
 
 import android.content.Context;
 import android.os.Bundle;

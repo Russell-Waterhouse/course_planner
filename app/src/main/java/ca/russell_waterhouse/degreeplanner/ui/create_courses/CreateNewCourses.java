@@ -1,4 +1,4 @@
-package com.example.degreeplanner.ui.create_courses;
+package ca.russell_waterhouse.degreeplanner.ui.create_courses;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.degreeplanner.R;
-import com.example.degreeplanner.database.CourseEntity;
+import ca.russell_waterhouse.degreeplanner.database.CourseEntity;
 
 public class CreateNewCourses extends AppCompatActivity {
     CreateNewCoursesViewModel viewModel;

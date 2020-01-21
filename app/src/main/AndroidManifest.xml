@@ -10,20 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.about_app.AboutAppActivity"
+            android:name="ca.russell_waterhouse.degreeplanner.ui.about_app.AboutAppActivity"
             android:label="@string/title_activity_about_app"
-            android:parentActivityName=".ui.welcome.WelcomeActivity"
+            android:parentActivityName="ca.russell_waterhouse.degreeplanner.ui.welcome.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.welcome.WelcomeActivity">
+        <activity android:name="ca.russell_waterhouse.degreeplanner.ui.welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.create_courses.CreateNewCourses" />
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.FragmentTestingActivity"/>
+        <activity android:name="ca.russell_waterhouse.degreeplanner.ui.create_courses.CreateNewCourses" />
+        <activity android:name="ca.russell_waterhouse.degreeplanner.ui.main.MainActivity" />
+        <activity android:name="ca.russell_waterhouse.degreeplanner.ui.FragmentTestingActivity"/>
     </application>
 
 </manifest>
